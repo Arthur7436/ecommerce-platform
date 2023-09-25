@@ -269,6 +269,8 @@ namespace ECommerceAPI.Controllers
                 cnn.Close();
             }
 
+            return Ok();
+
         }
     }
 }
