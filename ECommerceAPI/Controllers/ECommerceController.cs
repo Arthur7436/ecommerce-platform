@@ -269,7 +269,7 @@ namespace ECommerceAPI.Controllers
                 cnn.Close();
             }
 
-            return Ok();
+            return Ok("deleted successfully");
 
         }
     }
