@@ -256,7 +256,8 @@ namespace ECommerceAPI.Controllers
 
             if (delete != null)
             {
-                sql = $"delete dbo.Product set NameOfProduct = '{newName}', Description = '{newDescription}' where Identify={index + 1}";
+                sql = $"DELETE dbo.Product where Identify={index + 1}";
+                //sql = $"delete dbo.Product set NameOfProduct = '{newName}', Description = '{newDescription}' where Identify={index + 1}";
                 //sql = "Update dbo.Product set NameOfProduct='" + $" values {newName}" + $"{newDescription}" + $"' where Identify={index + 1}";
 
                 cnn.Open();
