@@ -262,8 +262,8 @@ namespace ECommerceAPI.Controllers
 
                 cnn.Open();
                 command = new SqlCommand(sql, cnn);
-                adapter.UpdateCommand = new SqlCommand(sql, cnn);
-                adapter.UpdateCommand.ExecuteNonQuery();
+                adapter.DeleteCommand = new SqlCommand(sql, cnn);
+                adapter.DeleteCommand.ExecuteNonQuery();
 
                 cnn.Dispose();
                 cnn.Close();
