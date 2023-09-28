@@ -10,6 +10,8 @@ namespace ECommercePlatform
             List<Product> ListOfProducts = new List<Product>(); //create a list to store all products inside
             ProductRepository.ConnectToSqlDb(); //connect program to database
 
+            //create folder if doesn't exist
+
 
             do
             {
