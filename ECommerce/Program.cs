@@ -9,46 +9,8 @@ namespace ECommercePlatform
         {
             List<Product> ListOfProducts = new List<Product>(); //create a list to store all products inside
             ProductRepository.ConnectToSqlDb(); //connect program to database
-
-            //create folder if doesn't exist
-            string path = @"c:\FileStorage";
-
-            try
-            {
-                if (Directory.Exists(path)) //if directory exists then return
-                {
-                    return;
-                }
-
-                //create directory
-                DirectoryInfo di = Directory.CreateDirectory(path);
-                Console.WriteLine($"Directory was successfully created at {Directory.GetCreationTime(path)}");
-
-                //create file in directory
-
-
-            } catch (Exception e) {
-                Console.WriteLine($"The process failed: {e.ToString}"); //give error message 
-                
-            }
-            finally { }
-
-            //create a file in directory if it doesn't exist
-            string filePath = @"c:\FileStorage\Test.json";
-
-            try
-            {
-                if (Directory.Exists(filePath)) //id directory exists then return
-                {
-                    return;
-                }
-
-                using (FileStream fs = File.Create(filePath)); //create the file
-            }
-            catch (Exception e) {
-                Console.WriteLine($"The process failed: {e.ToString}");
-            }
-            finally { }
+            ProductRepository.CheckForDirectory();
+            ProductRepository.CheckForFile();
 
             do
             {
