@@ -38,7 +38,7 @@ namespace ECommercePlatform
 
             try
             {
-
+                using (FileStream fs = File.Create(filePath)); 
             }
             catch (Exception e) { 
             
