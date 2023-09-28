@@ -43,7 +43,7 @@ namespace ECommercePlatform
                     return;
                 }
 
-                using (FileStream fs = File.Create(filePath)); 
+                using (FileStream fs = File.Create(filePath)); //create the file
             }
             catch (Exception e) {
                 Console.WriteLine($"The process failed: {e.ToString}");
