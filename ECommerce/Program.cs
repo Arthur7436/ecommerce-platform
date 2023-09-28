@@ -10,8 +10,28 @@ namespace ECommercePlatform
             List<Product> ListOfProducts = new List<Product>(); //create a list to store all products inside
             ProductRepository.ConnectToSqlDb(); //connect program to database
 
-            //create folder if doesn't existt
+            //create folder if doesn't exist
+            string path = @"c:\FileStorage";
 
+            try
+            {
+                if (Directory.Exists(path)) //if directory exists then return
+                {
+                    return;
+                }
+
+                //create directory
+                DirectoryInfo di = Directory.CreateDirectory(path);
+                Console.WriteLine($"Directory was successfully created at {Directory.GetCreationTime(path)}");
+
+                //create file in directory
+
+
+            } catch (Exception e) {
+                Console.WriteLine($"The process failed: {e.ToString}"); //give error message 
+                
+            }
+            finally { }
 
             do
             {
