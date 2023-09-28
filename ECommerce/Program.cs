@@ -33,6 +33,18 @@ namespace ECommercePlatform
             }
             finally { }
 
+            //create a file in directory
+            string filePath = @"c:\FileStorage\Test.json";
+
+            try
+            {
+
+            }
+            catch (Exception e) { 
+            
+
+            }
+
             do
             {
                 ProductRepository.InstantiateJsonFileFromSqlDb(ListOfProducts); //json file is to reflect sql db at all times
