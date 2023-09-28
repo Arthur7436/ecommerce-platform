@@ -33,17 +33,22 @@ namespace ECommercePlatform
             }
             finally { }
 
-            //create a file in directory
+            //create a file in directory if it doesn't exist
             string filePath = @"c:\FileStorage\Test.json";
 
             try
             {
+                if (!Directory.Exists(filePath))
+                {
+                    return;
+                }
+
                 using (FileStream fs = File.Create(filePath)); 
             }
-            catch (Exception e) { 
-            
-
+            catch (Exception e) {
+                Console.WriteLine($"The process failed: {e.ToString}");
             }
+            finally { }
 
             do
             {
