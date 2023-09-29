@@ -125,7 +125,7 @@ namespace ECommerce.Repository
                 Environment.Exit(0); //exit program
             }
         }
-        public static void TurnOffConnectionToDb()
+        public static void ProgramShutDown()
         {
             SetSqlVariables(out adapter, out sql, out cnn);
 

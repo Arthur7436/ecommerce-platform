@@ -28,7 +28,7 @@ namespace ECommercePlatform
 
                 if (input == "q") //quit the program
                 {
-                    ProductRepository.TurnOffConnectionToDb(); //close the connection of db when they click q
+                    ProductRepository.ProgramShutDown(); //close the connection of db when they click q
                     return; //close the program
                 }
                 else if (input == "r") //reset program memory
