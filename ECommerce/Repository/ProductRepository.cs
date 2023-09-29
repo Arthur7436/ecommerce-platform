@@ -172,7 +172,7 @@ namespace ECommerce.Repository
             sql = "";
             string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
             string connectionString = null!;
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}"; //connection to sql db
+            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
             cnn = new SqlConnection(connectionString);
         }
 
@@ -283,10 +283,25 @@ namespace ECommerce.Repository
 
         public static void ViewSqlDb()
         {
-            SetSqlVariables(out adapter,out sql, out cnn);
+            ////create sql commands to be able to read from db
+            //SqlCommand command;
+
+            //String sql, Output = "";
+
+            //string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
+
+            //sql = "Select Identify,Id,NameOfProduct,Description from dbo.Product";
+
+            //string connectionString = null!;
+            //SqlConnection cnn;
+            //connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
+            SetSqlVariables(out adapter, out sql, out cnn);
 
             //assign connection
             SqlDataReader dataReader;
+            String sql1, Output = "";
+
+            //cnn = new SqlConnection(connectionString);
             cnn.Open();
             command = new SqlCommand(sql, cnn);
             dataReader = command.ExecuteReader();
@@ -300,9 +315,10 @@ namespace ECommerce.Repository
             Console.WriteLine("SQL database:");
             Console.ResetColor();
             Console.WriteLine(Output);
+
             dataReader.Close();
-            command.Dispose();
-            cnn.Close();
+
+            CloseSqlConnection();
         }
 
         public static void ClearProductList(List<Product> ListOfProducts)
