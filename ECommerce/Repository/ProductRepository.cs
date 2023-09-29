@@ -346,16 +346,7 @@ namespace ECommerce.Repository
 
         public static void RemoveProduct(List<Product> ListOfProducts)
         {
-            //set sql variables
-            SqlCommand command;
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            String sql = "";
-
-            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
-            string connectionString = null!;
-            SqlConnection cnn;
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
-            cnn = new SqlConnection(connectionString);
+            SetSqlVariables(out adapter, out sql, out cnn);
             cnn.Open();
 
             //collect info from user
@@ -381,6 +372,8 @@ namespace ECommerce.Repository
                 Console.ResetColor();
 
                 Console.ReadLine();
+
+                CloseSqlConnection();
                 return;
             }
 
@@ -399,12 +392,11 @@ namespace ECommerce.Repository
                         sql = $"Delete dbo.Product where Identify={i + 1}";
 
                         command = new SqlCommand(sql, cnn);
-                        cnn.Open();
+                        //cnn.Open();
                         adapter.DeleteCommand = new SqlCommand(sql, cnn);
                         adapter.DeleteCommand.ExecuteNonQuery();
 
-                        command.Dispose();
-                        cnn.Close();
+                        CloseSqlConnection ();
 
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Product successfully removed!");
