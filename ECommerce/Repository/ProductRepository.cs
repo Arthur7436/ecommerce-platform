@@ -155,6 +155,11 @@ namespace ECommerce.Repository
             adapter.UpdateCommand = new SqlCommand(sql, cnn);
             adapter.UpdateCommand.ExecuteNonQuery();
 
+            CloseSqlConnection();
+        }
+
+        private static void CloseSqlConnection()
+        {
             command.Dispose();
             cnn.Close();
         }
@@ -173,6 +178,8 @@ namespace ECommerce.Repository
 
         public static void UpdateProduct(List<Product> ListOfProducts)
         {
+            SetSqlVariables(out adapter, out sql, out cnn);
+            
             //set sql variables
             SqlCommand command;
             SqlDataAdapter adapter = new SqlDataAdapter();
