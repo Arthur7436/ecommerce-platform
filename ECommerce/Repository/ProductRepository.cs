@@ -283,18 +283,6 @@ namespace ECommerce.Repository
 
         public static void ViewSqlDb()
         {
-            ////create sql commands to be able to read from db
-            //SqlCommand command;
-
-            //String sql, Output = "";
-
-            //string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
-
-            //sql = "Select Identify,Id,NameOfProduct,Description from dbo.Product";
-
-            //string connectionString = null!;
-            //SqlConnection cnn;
-            //connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
             SetSqlVariables(out adapter, out sql, out cnn);
 
             //assign connection
