@@ -410,19 +410,9 @@ namespace ECommerce.Repository
 
         public static void AddProductToListAndSqlDb(List<Product> ListOfProducts)
         {
-            //set sql variables
-            SqlCommand command;
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            String sql = "";
-
-            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
-            string connectionString = null!;
-            SqlConnection cnn;
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
-            cnn = new SqlConnection(connectionString);
+            SetSqlVariables(out adapter, out sql, out cnn);
 
             //Create instance and add details to the instance which will be added to the list
-
             Product product = new Product();
 
             string GenerateRandomID = Guid.NewGuid().ToString("N");
@@ -471,8 +461,7 @@ namespace ECommerce.Repository
             cnn.Open();
             adapter.InsertCommand.ExecuteNonQuery();
 
-            command.Dispose();
-            cnn.Close();
+            CloseSqlConnection();
 
             Console.ReadLine();
         }
