@@ -120,22 +120,22 @@ namespace ECommerce.Repository
                 Environment.Exit(0); //exit program
             }
         }
-        public static void TurnOffConnectionToDb()
-        {
-            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!; //used SETX command to store SQL_PASSWORD into local machine so that credentials are not hard-coded
+        //public static void TurnOffConnectionToDb()
+        //{
+        //    string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!; //used SETX command to store SQL_PASSWORD into local machine so that credentials are not hard-coded
 
-            string connectionString = null!;
-            SqlConnection cnn;
+        //    string connectionString = null!;
+        //    SqlConnection cnn;
 
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=athai;Password={pwd}";
-            cnn = new SqlConnection(connectionString);
+        //    connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=athai;Password={pwd}";
+        //    cnn = new SqlConnection(connectionString);
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Database connection closing...");
-            Console.ResetColor();
-            cnn.Close();
-            Thread.Sleep(500);
-        }
+        //    Console.ForegroundColor = ConsoleColor.Green;
+        //    Console.WriteLine("Database connection closing...");
+        //    Console.ResetColor();
+        //    cnn.Close();
+        //    Thread.Sleep(500);
+        //}
 
         public static void MakeIdentifyColumnNumberingUpToDate()
         {
@@ -247,7 +247,6 @@ namespace ECommerce.Repository
                 {
                     Console.WriteLine("Enter new product description: ");
                     string? newProductDescription = Console.ReadLine();
-
                     //update the Object's property NameOfProduct
                     //go through whole list and find the object's index
                     for (int i = 0; i < ListOfProducts.Count; i++)
