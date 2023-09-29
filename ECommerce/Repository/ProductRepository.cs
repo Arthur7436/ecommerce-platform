@@ -7,6 +7,11 @@ namespace ECommerce.Repository
 {
     public class ProductRepository
     {
+        public static SqlCommand command;
+        public static SqlDataAdapter adapter;
+        public static string sql;
+        public static SqlConnection cnn;
+
         public static void InstantiateJsonFileFromSqlDb(List<Product> ListOfProducts)
         {
             //Make sql db as SOT and store in the file at the beginning
@@ -139,16 +144,7 @@ namespace ECommerce.Repository
 
         public static void MakeIdentifyColumnNumberingUpToDate()
         {
-            //set sql variables
-            SqlCommand command;
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            String sql = "";
-
-            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
-            string connectionString = null!;
-            SqlConnection cnn;
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
-            cnn = new SqlConnection(connectionString);
+            SetSqlVariables(out adapter, out sql, out cnn);
 
             cnn.Open();
 
@@ -161,6 +157,18 @@ namespace ECommerce.Repository
 
             command.Dispose();
             cnn.Close();
+        }
+
+        private static void SetSqlVariables(out SqlDataAdapter adapter, out string sql, out SqlConnection cnn)
+        {
+            //set sql variables
+            SqlCommand command;
+            adapter = new SqlDataAdapter();
+            sql = "";
+            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
+            string connectionString = null!;
+            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
+            cnn = new SqlConnection(connectionString);
         }
 
         public static void UpdateProduct(List<Product> ListOfProducts)
