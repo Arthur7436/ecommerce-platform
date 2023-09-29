@@ -125,22 +125,16 @@ namespace ECommerce.Repository
                 Environment.Exit(0); //exit program
             }
         }
-        //public static void TurnOffConnectionToDb()
-        //{
-        //    string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!; //used SETX command to store SQL_PASSWORD into local machine so that credentials are not hard-coded
+        public static void TurnOffConnectionToDb()
+        {
+            SetSqlVariables(out adapter, out sql, out cnn);
 
-        //    string connectionString = null!;
-        //    SqlConnection cnn;
-
-        //    connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=athai;Password={pwd}";
-        //    cnn = new SqlConnection(connectionString);
-
-        //    Console.ForegroundColor = ConsoleColor.Green;
-        //    Console.WriteLine("Database connection closing...");
-        //    Console.ResetColor();
-        //    cnn.Close();
-        //    Thread.Sleep(500);
-        //}
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Database connection closing...");
+            Console.ResetColor();
+            cnn.Close();
+            Thread.Sleep(500);
+        }
 
         public static void MakeIdentifyColumnNumberingUpToDate()
         {
