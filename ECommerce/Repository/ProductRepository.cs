@@ -180,17 +180,6 @@ namespace ECommerce.Repository
         {
             SetSqlVariables(out adapter, out sql, out cnn);
             
-            //set sql variables
-            SqlCommand command;
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            String sql = "";
-
-            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
-            string connectionString = null!;
-            SqlConnection cnn;
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
-            cnn = new SqlConnection(connectionString);
-
             //Ask the user
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Which product did you want to update: ");
