@@ -172,7 +172,7 @@ namespace ECommerce.Repository
             sql = "";
             string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
             string connectionString = null!;
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
+            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}"; //connection to sql db
             cnn = new SqlConnection(connectionString);
         }
 
@@ -195,8 +195,6 @@ namespace ECommerce.Repository
             List<string> productDetails = new List<string>();
             productDetails.Add("Name of Product");
             productDetails.Add("Description of product");
-
-
 
             if (ListOfProducts.Any(x => x.NameOfProduct == UserInput)) //if user selects a product via NameOfProduct
             {
@@ -235,10 +233,7 @@ namespace ECommerce.Repository
                             Console.WriteLine(adapter.UpdateCommand.ExecuteNonQuery());
                             adapter.UpdateCommand.ExecuteNonQuery();
 
-                            command.Dispose();
-                            cnn.Close();
-
-
+                            CloseSqlConnection();
 
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Product name updated!");
@@ -269,8 +264,7 @@ namespace ECommerce.Repository
                             adapter.UpdateCommand = new SqlCommand(sql, cnn);
                             adapter.UpdateCommand.ExecuteNonQuery();
 
-                            command.Dispose();
-                            cnn.Close();
+                            CloseSqlConnection() ;
 
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Product description updated!");
@@ -289,21 +283,10 @@ namespace ECommerce.Repository
 
         public static void ViewSqlDb()
         {
-            //create sql commands to be able to read from db
-            SqlCommand command;
-            SqlDataReader dataReader;
-            String sql, Output = "";
-
-            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
-
-            sql = "Select Identify,Id,NameOfProduct,Description from dbo.Product";
-
-            string connectionString = null!;
-            SqlConnection cnn;
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
+            SetSqlVariables(out adapter,out sql, out cnn);
 
             //assign connection
-            cnn = new SqlConnection(connectionString);
+            SqlDataReader dataReader;
             cnn.Open();
             command = new SqlCommand(sql, cnn);
             dataReader = command.ExecuteReader();
