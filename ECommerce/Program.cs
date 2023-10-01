@@ -22,41 +22,42 @@ namespace ECommercePlatform
 
                 ProductRepository.DisplayMenu();//Display the menu to user
 
-                string? input = Console.ReadLine(); //store the users input into variable to determine program flow
+                string? input = Console.ReadLine(); //store the users input into variable to determine program flow 
 
-                //FIND A WAY TO MAKE SWITCH FOR THE IF-ELSE PROGRAM FLOW AT THE BOTTOM
-
-                if (input == "q") //quit the program
+                switch (input)
                 {
+                    case "q": //quit the program
+                
                     ProductRepository.ProgramShutDown(); //close the connection of db when they click q
-                    return; //close the program
-                }
-                else if (input == "r") //reset program memory
-                {
+                        break; //close the program
+
+                    case "r": //reset program memory
+                
                     ProductRepository.ClearProductList(ListOfProducts); //reset the list and json file
-                }
-                else if (input == "1") //view all products available
-                {
+                        break;
+                case "1": //view all products available
                     ProductRepository.ViewProduct(ListOfProducts); //views what is in list & JSON file
 
                     ProductRepository.ViewSqlDb(); //views what is in db
 
                     Thread.Sleep(500);
-                }
-                else if (input == "2") //add the product requested by user via the console application
-                {
+                        break;
+                case "2": //add the product requested by user via the console application
+                
                     ProductRepository.AddProductToListAndSqlDb(ListOfProducts!); //Add product to JSON file and SQL db
                     ProductRepository.SerializeToJsonFile(ListOfProducts); //Serialize the updated list to the JSON file
-                }
-                else if (input == "3") //remove the product requested by user
-                {
+                        break;
+                case "3": //remove the product requested by user
                     ProductRepository.RemoveProduct(ListOfProducts!);//removes the requested product
                     ProductRepository.SerializeToJsonFile(ListOfProducts);//Serialize the updated list to the JSON file
-                }
-                else if (input == "4") //update the product requested by user
-                {
+                        break;  
+                case "4": //update the product requested by user
                     ProductRepository.UpdateProduct(ListOfProducts!);//Updates the products name or description in both JSON file and SQL db
-                }
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input");
+                        break;
+            }
             } while (true);
         }
     }
