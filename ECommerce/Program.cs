@@ -45,11 +45,11 @@ namespace ECommercePlatform
                 case "2": //add the product requested by user via the console application
                 
                     ProductRepository.AddProductToListAndSqlDb(ListOfProducts!); //Add product to JSON file and SQL db
-                    ProductRepository.SerializeToJsonFile(ListOfProducts); //Serialize the updated list to the JSON file
+                    ProductFileManager.SerializeToJsonFile(ListOfProducts); //Serialize the updated list to the JSON file
                         break;
                 case "3": //remove the product requested by user
                     ProductRepository.RemoveProduct(ListOfProducts!);//removes the requested product
-                    ProductRepository.SerializeToJsonFile(ListOfProducts);//Serialize the updated list to the JSON file
+                    ProductFileManager.SerializeToJsonFile(ListOfProducts);//Serialize the updated list to the JSON file
                         break;  
                 case "4": //update the product requested by user
                     ProductRepository.UpdateProduct(ListOfProducts!);//Updates the products name or description in both JSON file and SQL db

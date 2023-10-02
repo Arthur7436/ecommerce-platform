@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ECommerce.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,6 +58,12 @@ namespace ECommerce.Repository
                 Console.WriteLine($"The process failed: {e.ToString}");
             }
             finally { }
+        }
+
+        public static void SerializeToJsonFile(List<Product> ListOfProducts)
+        {
+            string json = $"{JsonConvert.SerializeObject(ListOfProducts, Formatting.Indented)}";
+            File.WriteAllText(@"C:\FileStorage\Test.json", json); //add ListOfProducts <List> into JSON file
         }
     }
 }
