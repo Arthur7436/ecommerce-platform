@@ -7,10 +7,10 @@ namespace ECommerce.Repository
 {
     public class ProductRepository
     {
-        public static SqlCommand command;
-        public static SqlDataAdapter adapter;
-        public static string sql;
-        public static SqlConnection cnn;
+        public static SqlCommand? command;
+        public static SqlDataAdapter? adapter;
+        public static string? sql;
+        public static SqlConnection? cnn;
 
         public static void InstantiateJsonFileFromSqlDb(List<Product> ListOfProducts)
         {
