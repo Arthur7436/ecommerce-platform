@@ -26,7 +26,7 @@ namespace ECommerce.Repository
 
         public static void UpdateProduct(List<Product> ListOfProducts)
         {
-            SetSqlVariables(out adapter, out sql, out cnn);
+            ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
             
             //Ask the user
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -70,7 +70,7 @@ namespace ECommerce.Repository
                         if (ListOfProducts[i].NameOfProduct == UserInput)
                         {
                             ListOfProducts[i].NameOfProduct = newProductName;
-                            ProductRepository.SerializeToJsonFile(ListOfProducts); //serialize to json file so that it would not be overwritten at the start of Main Program
+                            ProductFileManager.SerializeToJsonFile(ListOfProducts); //serialize to json file so that it would not be overwritten at the start of Main Program
                             //update in sql db
                             cnn.Open();
                             sql = "Update dbo.Product set NameOfProduct='" + $"{newProductName}" + $"' where Identify={i + 1}"; //Update the column NameOfProduct at the row of that product
@@ -81,7 +81,7 @@ namespace ECommerce.Repository
                             Console.WriteLine(adapter.UpdateCommand.ExecuteNonQuery());
                             adapter.UpdateCommand.ExecuteNonQuery();
 
-                            CloseSqlConnection();
+                            ProductDataBaseHandler.CloseSqlConnection();
 
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Product name updated!");
@@ -101,7 +101,7 @@ namespace ECommerce.Repository
                         if (ListOfProducts[i].NameOfProduct == UserInput)
                         {
                             ListOfProducts[i].Description = newProductDescription;
-                            ProductRepository.SerializeToJsonFile(ListOfProducts); //serialize to json file so that it would not be overwritten
+                            ProductFileManager.SerializeToJsonFile(ListOfProducts); //serialize to json file so that it would not be overwritten
 
                             //update in sql db
                             cnn.Open();
@@ -112,7 +112,7 @@ namespace ECommerce.Repository
                             adapter.UpdateCommand = new SqlCommand(sql, cnn);
                             adapter.UpdateCommand.ExecuteNonQuery();
 
-                            CloseSqlConnection() ;
+                            ProductDataBaseHandler.CloseSqlConnection() ;
 
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Product description updated!");
