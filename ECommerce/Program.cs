@@ -38,7 +38,7 @@ namespace ECommercePlatform
                 case "1": //view all products available
                     ProductRepository.ViewProduct(ListOfProducts); //views what is in list & JSON file
 
-                    ProductRepository.ViewSqlDb(); //views what is in db
+                    ProductDataBaseHandler.ViewSqlDb(); //views what is in db
 
                     Thread.Sleep(500);
                         break;
