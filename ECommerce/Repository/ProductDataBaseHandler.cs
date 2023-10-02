@@ -130,7 +130,50 @@ namespace ECommerce.Repository
             command.Dispose();
             cnn.Close();
 
-            ProductRepository.SerializeToJsonFile(products); //serializes the most up to date list into a json file
+            ProductFileManager.SerializeToJsonFile(products); //serializes the most up to date list into a json file
+        }
+
+        public static void ViewSqlDb()
+        {
+            SetSqlVariables(out adapter, out sql, out cnn);
+
+            //assign connection
+            SqlDataReader dataReader;
+            String sql1, Output = "";
+
+            //cnn = new SqlConnection(connectionString);
+            cnn.Open();
+            command = new SqlCommand(sql, cnn);
+            dataReader = command.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                Output = Output + dataReader.GetValue(0) + " - " + dataReader.GetValue(1) + " - " + dataReader.GetValue(2) + " - " + dataReader.GetValue(3) + "\n";
+            }
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("SQL database:");
+            Console.ResetColor();
+            Console.WriteLine(Output);
+
+            dataReader.Close();
+
+            CloseSqlConnection();
+        }
+        public static void MakeIdentifyColumnNumberingUpToDate()
+        {
+            SetSqlVariables(out adapter, out sql, out cnn);
+
+            cnn.Open();
+
+            //Make Identify to be sequential numbering
+            sql = "DECLARE @id INT SET @id = 0 UPDATE dbo.Product SET @id = Identify = @id + 1";
+
+            command = new SqlCommand(sql, cnn);
+            adapter.UpdateCommand = new SqlCommand(sql, cnn);
+            adapter.UpdateCommand.ExecuteNonQuery();
+
+            CloseSqlConnection();
         }
     }
 }
