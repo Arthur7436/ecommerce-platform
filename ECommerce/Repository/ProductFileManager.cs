@@ -38,7 +38,6 @@ namespace ECommerce.Repository
             }
             finally { }
         }
-
         public static void CheckForFile()
         {
             //create a file in directory if it doesn't exist
@@ -59,7 +58,6 @@ namespace ECommerce.Repository
             }
             finally { }
         }
-
         public static void SerializeToJsonFile(List<Product> ListOfProducts)
         {
             string json = $"{JsonConvert.SerializeObject(ListOfProducts, Formatting.Indented)}";

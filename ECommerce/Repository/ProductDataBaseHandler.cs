@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ECommerce.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +53,84 @@ namespace ECommerce.Repository
                 Thread.Sleep(3000);
                 Environment.Exit(0); //exit program
             }
+        }
+        public static void CloseSqlConnection()
+        {
+            command?.Dispose();
+            cnn?.Close();
+        }
+
+        public static void SetSqlVariables(out SqlDataAdapter adapter, out string sql, out SqlConnection cnn)
+        {
+            //set sql variables
+            SqlCommand command;
+            adapter = new SqlDataAdapter();
+            sql = "";
+            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
+            string connectionString = null!;
+            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
+            cnn = new SqlConnection(connectionString);
+        }
+
+        public static void InstantiateJsonFileFromSqlDb(List<Product> ListOfProducts)
+        {
+            //Make sql db as SOT and store in the file at the beginning
+            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!; //used SETX command to store SQL_PASSWORD into local machine so that credentials are not hard-coded
+            Console.ForegroundColor = ConsoleColor.Green;
+            //Console.WriteLine("Storage of password in variable was successful...");
+            Console.ResetColor();
+            Thread.Sleep(500);
+
+            //Attempt to connect console application to server database
+
+            //variable declaration
+            string connectionString = null!;
+            SqlConnection cnn;
+            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
+
+            //assign connection
+            cnn = new SqlConnection(connectionString);
+
+            //See if the connection works
+            try //if connection to db is successful
+            {
+                cnn.Open();
+
+            }
+            catch (Exception ex) //if connection to db is unsuccessful
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Cannot open connection... ");
+                Console.ResetColor();
+                Thread.Sleep(3000);
+            }
+
+            //create sql commands to be able to read from db
+            SqlCommand command;
+            SqlDataReader dataReader;
+            String sql, Output = "";
+            sql = "Select Identify,Id,NameOfProduct,Description from dbo.Product";
+            command = new SqlCommand(sql, cnn);
+            dataReader = command.ExecuteReader();
+
+
+            //convert what is in the db and deserialize into json file
+            List<Product> products = new List<Product>();
+
+            while (dataReader.Read())
+            {
+                Product product = new Product();
+                product.Id = (string)dataReader["Id"];
+                product.NameOfProduct = (string)dataReader["NameOfProduct"];
+                product.Description = (string)dataReader["Description"];
+                products.Add(product);
+            }
+
+            dataReader.Close();
+            command.Dispose();
+            cnn.Close();
+
+            ProductRepository.SerializeToJsonFile(products); //serializes the most up to date list into a json file
         }
     }
 }

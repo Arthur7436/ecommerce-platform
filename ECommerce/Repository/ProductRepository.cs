@@ -12,119 +12,6 @@ namespace ECommerce.Repository
         public static string? sql;
         public static SqlConnection? cnn;
 
-        public static void InstantiateJsonFileFromSqlDb(List<Product> ListOfProducts)
-        {
-            //Make sql db as SOT and store in the file at the beginning
-            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!; //used SETX command to store SQL_PASSWORD into local machine so that credentials are not hard-coded
-            Console.ForegroundColor = ConsoleColor.Green;
-            //Console.WriteLine("Storage of password in variable was successful...");
-            Console.ResetColor();
-            Thread.Sleep(500);
-
-            //Attempt to connect console application to server database
-
-            //variable declaration
-            string connectionString = null!;
-            SqlConnection cnn;
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
-
-            //assign connection
-            cnn = new SqlConnection(connectionString);
-
-            //See if the connection works
-            try //if connection to db is successful
-            {
-                cnn.Open();
-
-            }
-            catch (Exception ex) //if connection to db is unsuccessful
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Cannot open connection... ");
-                Console.ResetColor();
-                Thread.Sleep(3000);
-            }
-
-            //create sql commands to be able to read from db
-            SqlCommand command;
-            SqlDataReader dataReader;
-            String sql, Output = "";
-            sql = "Select Identify,Id,NameOfProduct,Description from dbo.Product";
-            command = new SqlCommand(sql, cnn);
-            dataReader = command.ExecuteReader();
-
-
-            //convert what is in the db and deserialize into json file
-            List<Product> products = new List<Product>();
-
-            while (dataReader.Read())
-            {
-                Product product = new Product();
-                product.Id = (string)dataReader["Id"];
-                product.NameOfProduct = (string)dataReader["NameOfProduct"];
-                product.Description = (string)dataReader["Description"];
-                products.Add(product);
-            }
-
-            dataReader.Close();
-            command.Dispose();
-            cnn.Close();
-
-            ProductRepository.SerializeToJsonFile(products); //serializes the most up to date list into a json file
-        }
-        public static List<Product> DeserializeJsonFileToList()
-        {
-            List<Product> ListOfProducts;
-            //turn the Json file into ListOfProducts so that memory is stored
-            string storedJsonMemory = File.ReadAllText(@"C:\FileStorage\Test.json");
-            ListOfProducts = JsonConvert.DeserializeObject<List<Product>>(storedJsonMemory)!;
-            return ListOfProducts;
-        }
-
-        public static void SerializeToJsonFile(List<Product> ListOfProducts)
-        {
-            string json = $"{JsonConvert.SerializeObject(ListOfProducts, Formatting.Indented)}";
-            File.WriteAllText(@"C:\FileStorage\Test.json", json); //add ListOfProducts <List> into JSON file
-        }
-
-        public static void ConnectToSqlDb()
-        {
-            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!; //used SETX command to store SQL_PASSWORD into local machine so that credentials are not hard-coded
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Storage of password in variable was successful...");
-            Console.ResetColor();
-            Thread.Sleep(500);
-
-
-            //Attempt to connect console application to server database
-
-            //variable declaration
-            string connectionString = null!;
-            SqlConnection cnn;
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
-
-            //assign connection
-            cnn = new SqlConnection(connectionString);
-
-            //See if the connection works
-            try //if connection to db is successful
-            {
-                cnn.Open();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Connection to SQL database was successful... ");
-                Console.ResetColor();
-                Thread.Sleep(500);
-                //cnn.Close(); Move this to TurnOffConnectionToDb method when user enters q
-            }
-            catch (Exception ex) //if connection to db is unsuccessful
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Cannot open connection... ");
-                Console.ResetColor();
-                Thread.Sleep(3000);
-                Environment.Exit(0); //exit program
-            }
-        }
         public static void ProgramShutDown()
         {
             SetSqlVariables(out adapter, out sql, out cnn);
@@ -152,13 +39,13 @@ namespace ECommerce.Repository
             CloseSqlConnection();
         }
 
-        private static void CloseSqlConnection()
+        public static void CloseSqlConnection()
         {
             command.Dispose();
             cnn.Close();
         }
 
-        private static void SetSqlVariables(out SqlDataAdapter adapter, out string sql, out SqlConnection cnn)
+        public static void SetSqlVariables(out SqlDataAdapter adapter, out string sql, out SqlConnection cnn)
         {
             //set sql variables
             SqlCommand command;
@@ -483,53 +370,6 @@ namespace ECommerce.Repository
             {
                 Console.WriteLine(displayMenu[i]); //display menu
             }
-        }
-        public static void CheckForDirectory(){
-            //create folder if doesn't exist
-            string path = @"c:\FileStorage";
-
-            try
-            {
-                if (Directory.Exists(path)) //if directory exists then return
-                {
-                    return;
-                }
-
-                //create directory
-                DirectoryInfo di = Directory.CreateDirectory(path);
-                Console.WriteLine($"Directory was successfully created at {Directory.GetCreationTime(path)}");
-
-                //create file in directory
-
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"The process failed: {e.ToString}"); //give error message 
-
-            }
-            finally { }
-        }
-
-        public static void CheckForFile()
-        {
-            //create a file in directory if it doesn't exist
-            string filePath = @"c:\FileStorage\Test.json";
-
-            try
-            {
-                if (Directory.Exists(filePath)) //id directory exists then return
-                {
-                    return;
-                }
-
-                using (FileStream fs = File.Create(filePath)) ; //create the file
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"The process failed: {e.ToString}");
-            }
-            finally { }
         }
     }
 }
