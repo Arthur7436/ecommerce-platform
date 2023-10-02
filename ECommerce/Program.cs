@@ -8,13 +8,13 @@ namespace ECommercePlatform
         static void Main(string[] args)
         {
             List<Product> ListOfProducts = new List<Product>(); //create a list to store all products inside
-            ProductRepository.ConnectToSqlDb(); //connect program to database
+            ProductDataBaseHandler.ConnectToSqlDb(); //connect program to database
             ProductFileManager.CheckForDirectory();
             ProductFileManager.CheckForFile();
 
             do
             {
-                ProductRepository.InstantiateJsonFileFromSqlDb(ListOfProducts); //json file is to reflect sql db at all times
+                ProductDataBaseHandler.InstantiateJsonFileFromSqlDb(ListOfProducts); //json file is to reflect sql db at all times
 
                 ListOfProducts = ProductRepository.DeserializeJsonFileToList(); //allows product stored in file as memory upon start up
 
