@@ -230,7 +230,7 @@ namespace ECommerce.Repository
 
         public static void AddProductToListAndSqlDb(List<Product> ListOfProducts)
         {
-            SetSqlVariables(out adapter, out sql, out cnn);
+            ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
 
             //Create instance and add details to the instance which will be added to the list
             Product product = new Product();
@@ -281,7 +281,7 @@ namespace ECommerce.Repository
             cnn.Open();
             adapter.InsertCommand.ExecuteNonQuery();
 
-            CloseSqlConnection();
+            ProductDataBaseHandler.CloseSqlConnection();
 
             Console.ReadLine();
         }
