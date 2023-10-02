@@ -14,7 +14,7 @@ namespace ECommerce.Repository
 
         public static void ProgramShutDown()
         {
-            SetSqlVariables(out adapter, out sql, out cnn);
+            ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Database connection closing...");
@@ -23,39 +23,6 @@ namespace ECommerce.Repository
             Thread.Sleep(500);
         }
 
-        public static void MakeIdentifyColumnNumberingUpToDate()
-        {
-            SetSqlVariables(out adapter, out sql, out cnn);
-
-            cnn.Open();
-
-            //Make Identify to be sequential numbering
-            sql = "DECLARE @id INT SET @id = 0 UPDATE dbo.Product SET @id = Identify = @id + 1";
-
-            command = new SqlCommand(sql, cnn);
-            adapter.UpdateCommand = new SqlCommand(sql, cnn);
-            adapter.UpdateCommand.ExecuteNonQuery();
-
-            CloseSqlConnection();
-        }
-
-        public static void CloseSqlConnection()
-        {
-            command.Dispose();
-            cnn.Close();
-        }
-
-        public static void SetSqlVariables(out SqlDataAdapter adapter, out string sql, out SqlConnection cnn)
-        {
-            //set sql variables
-            SqlCommand command;
-            adapter = new SqlDataAdapter();
-            sql = "";
-            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
-            string connectionString = null!;
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
-            cnn = new SqlConnection(connectionString);
-        }
 
         public static void UpdateProduct(List<Product> ListOfProducts)
         {
@@ -160,34 +127,6 @@ namespace ECommerce.Repository
                 Console.WriteLine("Product doesn't exist");
 
             }
-        }
-
-        public static void ViewSqlDb()
-        {
-            SetSqlVariables(out adapter, out sql, out cnn);
-
-            //assign connection
-            SqlDataReader dataReader;
-            String sql1, Output = "";
-
-            //cnn = new SqlConnection(connectionString);
-            cnn.Open();
-            command = new SqlCommand(sql, cnn);
-            dataReader = command.ExecuteReader();
-
-            while (dataReader.Read())
-            {
-                Output = Output + dataReader.GetValue(0) + " - " + dataReader.GetValue(1) + " - " + dataReader.GetValue(2) + " - " + dataReader.GetValue(3) + "\n";
-            }
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("SQL database:");
-            Console.ResetColor();
-            Console.WriteLine(Output);
-
-            dataReader.Close();
-
-            CloseSqlConnection();
         }
 
         public static void ClearProductList(List<Product> ListOfProducts)
