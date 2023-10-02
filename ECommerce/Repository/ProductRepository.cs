@@ -166,7 +166,7 @@ namespace ECommerce.Repository
 
         public static void RemoveProduct(List<Product> ListOfProducts)
         {
-            SetSqlVariables(out adapter, out sql, out cnn);
+            ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
             cnn.Open();
 
             //collect info from user
@@ -179,7 +179,7 @@ namespace ECommerce.Repository
                 Console.WriteLine(products.ToString());
             }
 
-            ViewSqlDb();
+            ProductDataBaseHandler.ViewSqlDb();
 
             Console.Write("Input: ");
             string userRemovalInput = Console.ReadLine()!;
@@ -193,7 +193,7 @@ namespace ECommerce.Repository
 
                 Console.ReadLine();
 
-                CloseSqlConnection();
+                ProductDataBaseHandler.CloseSqlConnection();
                 return;
             }
 
@@ -216,7 +216,7 @@ namespace ECommerce.Repository
                         adapter.DeleteCommand = new SqlCommand(sql, cnn);
                         adapter.DeleteCommand.ExecuteNonQuery();
 
-                        CloseSqlConnection ();
+                        ProductDataBaseHandler.CloseSqlConnection ();
 
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Product successfully removed!");
