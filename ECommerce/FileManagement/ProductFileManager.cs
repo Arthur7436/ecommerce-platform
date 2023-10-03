@@ -10,16 +10,15 @@ namespace ECommerce.Repository
 {
     public class ProductFileManager
     {
-        public static void SerializeToJsonFile(List<Product> ListOfProducts)
+        public static void SerializeToJsonFile(List<Product> ListOfProducts) //add ListOfProducts <List> into JSON file
         {
             string json = $"{JsonConvert.SerializeObject(ListOfProducts, Formatting.Indented)}";
-            File.WriteAllText(@"C:\FileStorage\Test.json", json); //add ListOfProducts <List> into JSON file
+            File.WriteAllText(@"C:\FileStorage\Test.json", json); 
         }
 
-        public static List<Product> DeserializeJsonFileToList()
+        public static List<Product> DeserializeJsonFileToList() //turn the Json file into ListOfProducts so that memory is stored
         {
             List<Product> ListOfProducts;
-            //turn the Json file into ListOfProducts so that memory is stored
             string storedJsonMemory = File.ReadAllText(@"C:\FileStorage\Test.json");
             ListOfProducts = JsonConvert.DeserializeObject<List<Product>>(storedJsonMemory)!;
             return ListOfProducts;
