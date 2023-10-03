@@ -1,5 +1,7 @@
-﻿using ECommerce.Models;
+﻿using ECommerce.FileManagement;
+using ECommerce.Models;
 using ECommerce.Repository;
+
 
 namespace ECommercePlatform
 {
@@ -9,8 +11,8 @@ namespace ECommercePlatform
         {
             List<Product> ListOfProducts = new List<Product>(); //create a list to store all products inside
             ProductDataBaseHandler.ConnectToSqlDb(); //connect program to database
-            ProductFileManager.CheckForDirectory();
-            ProductFileManager.CheckForFile();
+            CheckForFileAndDirectory.CheckForDirectory();
+            CheckForFileAndDirectory.CheckForFile();
 
             do
             {
