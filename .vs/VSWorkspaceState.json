@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ECommerce",
+    "\\ECommerce\\FileManagement",
+    "\\ECommerce\\Models",
+    "\\ECommerce\\Repository"
   ],
+  "SelectedNode": "\\ECommerce\\ECommerce.csproj",
   "PreviewInSolutionExplorer": false
 }
