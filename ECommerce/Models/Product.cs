@@ -13,13 +13,7 @@ namespace ECommerce.Models
         //[Required, StringLength(50), Display(Name = "Description")]
         [ScaffoldColumn(false)]
         public string? Description { get; set; }
-        //public override string ToString() //convert the product into readable string
-        //{
-        //    return $"Product Id: {Id} \n" +
-        //        $"Name of Product: {NameOfProduct} \n" +
-        //        $"Description of Product: {Description}";
-        //}
-
+      
         public override string ToString()
         {
             return $"Product Id: {Id} \n + Name of Product: {NameOfProduct} \n + Description of Product: {Description}";
