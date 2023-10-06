@@ -23,7 +23,6 @@ namespace ECommerce.Repository
             Thread.Sleep(500);
         }
 
-
         public static void UpdateProduct(List<Product> ListOfProducts)
         {
             ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
