@@ -16,6 +16,7 @@ namespace ECommerce.Repository
         public static string? sql;
         public static SqlConnection? cnn;
         public static string username = "athai";
+        public static string dataSource = "AUL1125";
 
         public static void ConnectToSqlDb()
         {
@@ -35,7 +36,7 @@ namespace ECommerce.Repository
             //variable declaration
             string connectionString = null!;
             SqlConnection cnn;
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID={username};Password={pwd}";
+            connectionString = $"Data Source={dataSource};Initial Catalog=ProductDB;User ID={username};Password={pwd}";
 
             //assign connection
             cnn = new SqlConnection(connectionString);
@@ -73,7 +74,7 @@ namespace ECommerce.Repository
             sql = "";
             string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
             string connectionString = null!;
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID={username};Password={pwd}";
+            connectionString = $"Data Source={dataSource};Initial Catalog=ProductDB;User ID={username};Password={pwd}";
             cnn = new SqlConnection(connectionString);
         }
 
@@ -91,7 +92,7 @@ namespace ECommerce.Repository
             //variable declaration
             string connectionString = null!;
             SqlConnection cnn;
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID={username};Password={pwd}";
+            connectionString = $"Data Source={dataSource};Initial Catalog=ProductDB;User ID={username};Password={pwd}";
 
             //assign connection
             cnn = new SqlConnection(connectionString);
