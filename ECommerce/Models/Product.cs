@@ -14,7 +14,7 @@ namespace ECommerce.Models
         [ScaffoldColumn(false)]
         public string? Description { get; set; }
       
-        public override string ToString()
+        public override string ToString() //get output of class objects in string format
         {
             return $"Product Id: {Id} \n + Name of Product: {NameOfProduct} \n + Description of Product: {Description}";
         }

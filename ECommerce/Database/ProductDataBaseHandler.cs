@@ -132,10 +132,9 @@ namespace ECommerce.Repository
 
             ProductFileManager.SerializeToJsonFile(products); //serializes the most up to date list into a json file
         }
-
         public static void ViewSqlDb()
         {
-            SetSqlVariables(out adapter, out sql, out cnn);
+            ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
 
             //assign connection
             SqlDataReader dataReader;
@@ -160,6 +159,7 @@ namespace ECommerce.Repository
 
             CloseSqlConnection();
         }
+
         public static void MakeIdentifyColumnNumberingUpToDate()
         {
             SetSqlVariables(out adapter, out sql, out cnn);
