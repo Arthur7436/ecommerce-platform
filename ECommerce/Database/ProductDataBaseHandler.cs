@@ -15,15 +15,17 @@ namespace ECommerce.Repository
         public static SqlDataAdapter? adapter;
         public static string? sql;
         public static SqlConnection? cnn;
-        public static string username = "athai";
-        public static string dataSource = "AUL1125";
+        public static string usernameSecret = File.ReadAllText(@"C:\ProjectSecrets\username.txt");
+        public static string username = usernameSecret;
+        public static string dataSourceName = File.ReadAllText(@"C:\ProjectSecrets\dataSourceName.txt");
+        public static string dataSource = dataSourceName;
+        public static string dataBase = "dbProduct";
+        public static string path = @"C:\ProjectSecrets\EcommerceSecrets.txt";
+        public static string pwd = File.ReadAllText(path);
 
         public static void ConnectToSqlDb()
         {
-            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!; //used SETX command to store SQL_PASSWORD into local machine so that credentials are not hard-coded
-
-            //
-
+   
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Storage of password in variable was successful...");
@@ -36,7 +38,7 @@ namespace ECommerce.Repository
             //variable declaration
             string connectionString = null!;
             SqlConnection cnn;
-            connectionString = $"Data Source={dataSource};Initial Catalog=ProductDB;User ID={username};Password={pwd}";
+            connectionString = $"Data Source={dataSource};Initial Catalog={dataBase};User ID={username};Password={pwd}";
 
             //assign connection
             cnn = new SqlConnection(connectionString);
@@ -72,16 +74,13 @@ namespace ECommerce.Repository
             SqlCommand command;
             adapter = new SqlDataAdapter();
             sql = "";
-            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
             string connectionString = null!;
-            connectionString = $"Data Source={dataSource};Initial Catalog=ProductDB;User ID={username};Password={pwd}";
+            connectionString = $"Data Source={dataSource};Initial Catalog={dataBase};User ID={username};Password={pwd}";
             cnn = new SqlConnection(connectionString);
         }
 
         public static void InstantiateJsonFileFromSqlDb(List<Product> ListOfProducts)
         {
-            //Make sql db as SOT and store in the file at the beginning
-            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!; //used SETX command to store SQL_PASSWORD into local machine so that credentials are not hard-coded
             Console.ForegroundColor = ConsoleColor.Green;
             //Console.WriteLine("Storage of password in variable was successful...");
             Console.ResetColor();
@@ -92,7 +91,7 @@ namespace ECommerce.Repository
             //variable declaration
             string connectionString = null!;
             SqlConnection cnn;
-            connectionString = $"Data Source={dataSource};Initial Catalog=ProductDB;User ID={username};Password={pwd}";
+            connectionString = $"Data Source={dataSource};Initial Catalog={dataBase};User ID={username};Password={pwd}";
 
             //assign connection
             cnn = new SqlConnection(connectionString);
