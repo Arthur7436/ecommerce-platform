@@ -139,8 +139,7 @@ namespace ECommerce.Repository
         }
         public static void ViewSqlDb()
         {
-
-        ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
+            ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
 
             //assign connection
             SqlDataReader dataReader;
