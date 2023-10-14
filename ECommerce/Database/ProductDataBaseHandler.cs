@@ -148,6 +148,7 @@ namespace ECommerce.Repository
             //cnn = new SqlConnection(connectionString);
             cnn.Open();
             command = new SqlCommand(sql, cnn);
+            command.CommandText = "Select Identify,Id,NameOfProduct,Description from dbo.Product";
             dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
