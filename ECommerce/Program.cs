@@ -14,6 +14,8 @@ namespace ECommercePlatform
             CheckForFileAndDirectory.CheckForDirectory();
             CheckForFileAndDirectory.CheckForFile();
 
+  
+
             do
             {
                 ProductDataBaseHandler.InstantiateJsonFileFromSqlDb(ListOfProducts); //json file is to reflect sql db at all times
@@ -30,8 +32,8 @@ namespace ECommercePlatform
                 {
                     case "q": //quit the program
                 
-                    ProductRepository.ProgramShutDown(); //close the connection of db when they click q
-                        break; //close the program
+                        Environment.Exit(0);
+                        return; //close the program
 
                     case "r": //reset program memory
                 

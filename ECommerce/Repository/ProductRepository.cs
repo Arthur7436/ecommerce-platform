@@ -14,13 +14,6 @@ namespace ECommerce.Repository
 
         public static void ProgramShutDown()
         {
-            ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Database connection closing...");
-            Console.ResetColor();
-            cnn.Close();
-            Thread.Sleep(500);
         }
 
         public static void UpdateProduct(List<Product> ListOfProducts)
