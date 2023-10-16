@@ -14,8 +14,6 @@ namespace ECommercePlatform
             CheckForFileAndDirectory.CheckForDirectory();
             CheckForFileAndDirectory.CheckForFile();
 
-  
-
             do
             {
                 ProductDataBaseHandler.InstantiateJsonFileFromSqlDb(ListOfProducts); //json file is to reflect sql db at all times
