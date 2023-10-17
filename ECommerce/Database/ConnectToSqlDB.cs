@@ -12,8 +12,6 @@ namespace ECommerce.Database
     {
         public static void ConnectToSqlDb()
         {
-
-
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Storage of password in variable was successful...");
             Console.ResetColor();
