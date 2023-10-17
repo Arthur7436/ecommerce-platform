@@ -1,4 +1,5 @@
-﻿using ECommerce.Database;
+﻿using ECommerce.DAL;
+using ECommerce.Database;
 using ECommerce.FileManagement;
 using ECommerce.Models;
 using ECommerce.Repository;
@@ -16,7 +17,7 @@ namespace ECommerce.Business_Logic
     {
         public static void UpdateProduct(List<Product> ListOfProducts)
         {
-            DataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
+            SqlVariables.SetSqlVariables(out adapter, out sql, out cnn);
 
             //Ask the user
             Console.ForegroundColor = ConsoleColor.Yellow;

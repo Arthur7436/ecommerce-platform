@@ -1,4 +1,5 @@
 ﻿using ECommerce.Business_Logic;
+using ECommerce.DAL;
 using ECommerce.Database;
 using ECommerce.FileManagement;
 using ECommerce.Models;
@@ -18,7 +19,7 @@ namespace ECommercePlatform
 
             do
             {
-                DataBaseHandler.InstantiateJsonFileFromSqlDb(ListOfProducts); //json file is to reflect sql db at all times
+                UpdateJsonFile.InstantiateJsonFileFromSqlDb(ListOfProducts); //json file is to reflect sql db at all times
 
                 ListOfProducts = ProductFileManager.DeserializeJsonFileToList(); //allows product stored in file as memory upon start up
 

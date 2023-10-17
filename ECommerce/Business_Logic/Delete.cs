@@ -1,4 +1,5 @@
-﻿using ECommerce.Database;
+﻿using ECommerce.DAL;
+using ECommerce.Database;
 using ECommerce.Models;
 using ECommerce.Repository;
 using System;
@@ -15,7 +16,7 @@ namespace ECommerce.Business_Logic
     {
         public static void DeleteProduct(List<Product> ListOfProducts)
         {
-            DataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
+            SqlVariables.SetSqlVariables(out adapter, out sql, out cnn);
             cnn.Open();
 
             //collect info from user

@@ -1,4 +1,5 @@
-﻿using ECommerce.Repository;
+﻿using ECommerce.DAL;
+using ECommerce.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -13,7 +14,7 @@ namespace ECommerce.Database
     {
         public static void ReadSqlDb()
         {
-            DataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
+            SqlVariables.SetSqlVariables(out adapter, out sql, out cnn);
 
             //assign connection
             SqlDataReader dataReader;
