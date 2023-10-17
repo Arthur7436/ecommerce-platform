@@ -1,7 +1,8 @@
-﻿using ECommerce.FileManagement;
+﻿using ECommerce.Business_Logic;
+using ECommerce.FileManagement;
 using ECommerce.Models;
 using ECommerce.Repository;
-
+using System.Collections.Generic;
 
 namespace ECommercePlatform
 {
@@ -20,9 +21,9 @@ namespace ECommercePlatform
 
                 ListOfProducts = ProductFileManager.DeserializeJsonFileToList(); //allows product stored in file as memory upon start up
 
-               // ProductDataBaseHandler.MakeIdentifyColumnNumberingUpToDate(); //Makes SQL db column for "Identify" in chronological numerical sequence 
+                // ProductDataBaseHandler.MakeIdentifyColumnNumberingUpToDate(); //Makes SQL db column for "Identify" in chronological numerical sequence 
 
-                ProductRepository.DisplayMenu();//Display the menu to user
+                DisplayMenuHandler.DisplayMenu();//Display the menu to user
 
                 string? input = Console.ReadLine(); //store the users input into variable to determine program flow 
 
@@ -34,27 +35,28 @@ namespace ECommercePlatform
                         return; //close the program
 
                     case "r": //reset program memory
-                
-                    ProductRepository.ClearProductList(ListOfProducts); //reset the list and json file
+
+                        ClearList.ClearAllList(ListOfProducts); //clears the list
+                        ClearFile.ClearAllFiles(ListOfProducts); //clears the file
                         break;
                 case "1": //view all products available
-                    ProductRepository.ViewProduct(ListOfProducts); //views what is in list & JSON file
+                        ECommerce.Repository.Main.ViewProduct(ListOfProducts); //views what is in list & JSON file
 
                     ProductDataBaseHandler.ViewSqlDb(); //views what is in db
 
                     Console.ReadLine();
                         break;
                 case "2": //add the product requested by user via the console application
-                
-                    ProductRepository.AddProductToListAndSqlDb(ListOfProducts!); //Add product to JSON file and SQL db
+
+                        ECommerce.Repository.Main.AddProductToListAndSqlDb(ListOfProducts!); //Add product to JSON file and SQL db
                     ProductFileManager.SerializeToJsonFile(ListOfProducts); //Serialize the updated list to the JSON file
                         break;
                 case "3": //remove the product requested by user
-                    ProductRepository.RemoveProduct(ListOfProducts!);//removes the requested product
+                        ECommerce.Repository.Main.RemoveProduct(ListOfProducts!);//removes the requested product
                     ProductFileManager.SerializeToJsonFile(ListOfProducts);//Serialize the updated list to the JSON file
                         break;  
                 case "4": //update the product requested by user
-                    ProductRepository.UpdateProduct(ListOfProducts!);//Updates the products name or description in both JSON file and SQL db
+                        ECommerce.Repository.Main.UpdateProduct(ListOfProducts!);//Updates the products name or description in both JSON file and SQL db
                         break;
                     default:
                         Console.WriteLine("Invalid input");

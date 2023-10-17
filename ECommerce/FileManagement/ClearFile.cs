@@ -10,7 +10,7 @@ namespace ECommerce.FileManagement
 {
     public class ClearFile
     {
-        public static void ClearProductList(List<Product> ListOfProducts)
+        public static void ClearAllFiles(List<Product> ListOfProducts)
         {
             //push those changes and serialize as Json 
             string json = JsonConvert.SerializeObject(ListOfProducts);

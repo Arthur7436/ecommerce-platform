@@ -10,7 +10,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ECommerce.Business_Logic
 {
-    public class DeleteHandler : ProductRepository
+    public class DeleteHandler : Main
     {
         public static void RemoveProduct(List<Product> ListOfProducts)
         {

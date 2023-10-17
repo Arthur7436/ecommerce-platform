@@ -12,15 +12,6 @@ namespace ECommerce.Repository
         public static string? sql;
         public static SqlConnection? cnn;
 
-        public static void ClearProductList(List<Product> ListOfProducts)
-        {
-            //remove everything in the list
-            ListOfProducts.Clear();
-            //push those changes and serialize as Json 
-            string json = JsonConvert.SerializeObject(ListOfProducts);
-            File.WriteAllText(@"C:\FileStorage\Test.json", json);
-        }
-
         public static void AddProductToListAndSqlDb(List<Product> ListOfProducts)
         {
             ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
