@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.FileManagement
 {
-    internal class ClearFile
+    public class ClearFile
     {
         public static void ClearProductList(List<Product> ListOfProducts)
         {
