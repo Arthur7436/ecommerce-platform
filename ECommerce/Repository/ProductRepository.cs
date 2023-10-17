@@ -12,10 +12,6 @@ namespace ECommerce.Repository
         public static string? sql;
         public static SqlConnection? cnn;
 
-        public static void ProgramShutDown()
-        {
-        }
-
         public static void UpdateProduct(List<Product> ListOfProducts)
         {
             ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
@@ -145,7 +141,7 @@ namespace ECommerce.Repository
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Here is the list of all products:");
                 Console.ResetColor();
-
+                 
                 //display all objects within List
                 foreach (Product products in ListOfProducts)
                 {
