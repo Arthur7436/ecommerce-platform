@@ -1,4 +1,5 @@
 ﻿using ECommerce.DAL;
+using ECommerce.DAL.Operations;
 using ECommerce.Database;
 using ECommerce.Models;
 using ECommerce.Repository;
@@ -10,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace ECommerce.Business_Logic
+namespace ECommerce.Business_Logic.Operations
 {
     public class Delete : Main
     {

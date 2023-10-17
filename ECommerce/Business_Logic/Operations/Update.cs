@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace ECommerce.Business_Logic
+namespace ECommerce.Business_Logic.Operations
 {
     public class Update : Main
     {
@@ -41,7 +41,7 @@ namespace ECommerce.Business_Logic
                 Console.WriteLine($"Which property did you want to update for '{UserInput}':");
                 Console.ResetColor();
 
-                for (int j = 0; j < (productDetails.Count); j++)
+                for (int j = 0; j < productDetails.Count; j++)
                 {
                     Console.WriteLine($"{j + 1}: {productDetails[j]}"); //display properties of Product that can be updated
                     //if we have reached to the last option of the list then break

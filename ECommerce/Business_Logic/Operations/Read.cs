@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECommerce.Business_Logic
+namespace ECommerce.Business_Logic.Operations
 {
     public class Read
     {

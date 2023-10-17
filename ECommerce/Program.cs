@@ -1,5 +1,7 @@
 ﻿using ECommerce.Business_Logic;
+using ECommerce.Business_Logic.Operations;
 using ECommerce.DAL;
+using ECommerce.DAL.Operations;
 using ECommerce.Database;
 using ECommerce.FileManagement;
 using ECommerce.Models;
@@ -23,7 +25,7 @@ namespace ECommercePlatform
 
                 ListOfProducts = ProductFileManager.DeserializeJsonFileToList(); //allows product stored in file as memory upon start up
 
-                // ProductDataBaseHandler.MakeIdentifyColumnNumberingUpToDate(); //Makes SQL db column for "Identify" in chronological numerical sequence 
+                //NumberingColumn.MakeIdentifyColumnNumberingUpToDate(); //Makes SQL db column for "Identify" in chronological numerical sequence 
 
                 Display.DisplayMenu();//Display the menu to user
 

@@ -23,20 +23,5 @@ namespace ECommerce.Repository
         public static string path = @"C:\ProjectSecrets\EcommerceSecrets.txt";
         public static string pwd = File.ReadAllText(path);
 
-        //public static void MakeIdentifyColumnNumberingUpToDate()
-        //{
-        //    SetSqlVariables(out adapter, out sql, out cnn);
-
-        //    cnn.Open();
-
-        //    //Make Identify to be sequential numbering
-        //    sql = "DECLARE @id INT SET @id = 0 UPDATE dbo.Product SET @id = Identify = @id + 1";
-
-        //    command = new SqlCommand(sql, cnn);
-        //    adapter.UpdateCommand = new SqlCommand(sql, cnn);
-        //    adapter.UpdateCommand.ExecuteNonQuery();
-
-        //    CloseSqlConnection();
-        //}
     }
 }

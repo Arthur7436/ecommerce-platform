@@ -1,4 +1,5 @@
 ﻿using ECommerce.DAL;
+using ECommerce.Database;
 using ECommerce.Repository;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace ECommerce.Database
+namespace ECommerce.DAL.Operations
 {
-     class ReadHandler : DataBaseHandler
+    class ReadHandler : DataBaseHandler
     {
         public static void ReadSqlDb()
         {
@@ -18,7 +19,7 @@ namespace ECommerce.Database
 
             //assign connection
             SqlDataReader dataReader;
-            String sql1, Output = "";
+            string sql1, Output = "";
 
             //cnn = new SqlConnection(connectionString);
             cnn.Open();

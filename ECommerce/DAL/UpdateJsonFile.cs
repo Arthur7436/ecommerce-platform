@@ -46,7 +46,7 @@ namespace ECommerce.DAL
             //create sql commands to be able to read from db
             SqlCommand command;
             SqlDataReader dataReader;
-            String sql, Output = "";
+            string sql, Output = "";
             sql = "Select Identify,Id,NameOfProduct,Description from dbo.Product";
             command = new SqlCommand(sql, cnn);
             dataReader = command.ExecuteReader();
