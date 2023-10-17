@@ -21,8 +21,6 @@ namespace ECommerce.Repository
             File.WriteAllText(@"C:\FileStorage\Test.json", json);
         }
 
-     
-
         public static void AddProductToListAndSqlDb(List<Product> ListOfProducts)
         {
             ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
