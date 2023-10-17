@@ -40,7 +40,7 @@ namespace ECommercePlatform
                         ClearFile.ClearAllFiles(ListOfProducts); //clears the file
                         break;
                 case "1": //view all products available
-                        ECommerce.Repository.Main.ViewProduct(ListOfProducts); //views what is in list & JSON file
+                        ViewHandler.ViewProduct(ListOfProducts); //views what is in list & JSON file
 
                     ProductDataBaseHandler.ViewSqlDb(); //views what is in db
 
@@ -52,11 +52,11 @@ namespace ECommercePlatform
                     ProductFileManager.SerializeToJsonFile(ListOfProducts); //Serialize the updated list to the JSON file
                         break;
                 case "3": //remove the product requested by user
-                        ECommerce.Repository.Main.RemoveProduct(ListOfProducts!);//removes the requested product
+                        DeleteHandler.DeleteProduct(ListOfProducts!);//removes the requested product
                     ProductFileManager.SerializeToJsonFile(ListOfProducts);//Serialize the updated list to the JSON file
                         break;  
                 case "4": //update the product requested by user
-                        ECommerce.Repository.Main.UpdateProduct(ListOfProducts!);//Updates the products name or description in both JSON file and SQL db
+                        UpdateHandler.UpdateProduct(ListOfProducts!);//Updates the products name or description in both JSON file and SQL db
                         break;
                     default:
                         Console.WriteLine("Invalid input");

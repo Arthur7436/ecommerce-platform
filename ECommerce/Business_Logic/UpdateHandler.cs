@@ -10,7 +10,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ECommerce.Business_Logic
 {
-    public class ViewHandler : ProductRepository
+    public class UpdateHandler : Main
     {
         public static void UpdateProduct(List<Product> ListOfProducts)
         {

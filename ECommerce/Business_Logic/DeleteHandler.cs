@@ -12,7 +12,7 @@ namespace ECommerce.Business_Logic
 {
     public class DeleteHandler : Main
     {
-        public static void RemoveProduct(List<Product> ListOfProducts)
+        public static void DeleteProduct(List<Product> ListOfProducts)
         {
             ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
             cnn.Open();
