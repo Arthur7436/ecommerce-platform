@@ -152,7 +152,6 @@ namespace ECommerce.Repository
                     Console.WriteLine(products.ToString());
                 }
 
-                Console.WriteLine();
             }
         }
 

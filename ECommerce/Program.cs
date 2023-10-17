@@ -42,7 +42,7 @@ namespace ECommercePlatform
 
                     ProductDataBaseHandler.ViewSqlDb(); //views what is in db
 
-                    Thread.Sleep(500);
+                    Console.ReadLine();
                         break;
                 case "2": //add the product requested by user via the console application
                 
