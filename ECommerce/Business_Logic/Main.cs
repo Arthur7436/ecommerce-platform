@@ -14,7 +14,7 @@ namespace ECommerce.Repository
 
         public static void AddProductToListAndSqlDb(List<Product> ListOfProducts)
         {
-            ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
+            DataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
 
             //Create instance and add details to the instance which will be added to the list
             Product product = new Product();
@@ -65,7 +65,7 @@ namespace ECommerce.Repository
             cnn.Open();
             adapter.InsertCommand.ExecuteNonQuery();
 
-            ProductDataBaseHandler.CloseSqlConnection();
+            DataBaseHandler.CloseSqlConnection();
 
             Console.ReadLine();
         }

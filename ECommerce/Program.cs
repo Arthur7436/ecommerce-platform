@@ -1,4 +1,5 @@
 ﻿using ECommerce.Business_Logic;
+using ECommerce.Database;
 using ECommerce.FileManagement;
 using ECommerce.Models;
 using ECommerce.Repository;
@@ -11,19 +12,19 @@ namespace ECommercePlatform
         static void Main(string[] args)
         {
             List<Product> ListOfProducts = new List<Product>(); //create a list to store all products inside
-            ProductDataBaseHandler.ConnectToSqlDb(); //connect program to database
+            ConnectToSqlDB.ConnectToSqlDb(); //connect program to database
             CheckForFileAndDirectory.CheckForDirectory();
             CheckForFileAndDirectory.CheckForFile();
 
             do
             {
-                ProductDataBaseHandler.InstantiateJsonFileFromSqlDb(ListOfProducts); //json file is to reflect sql db at all times
+                DataBaseHandler.InstantiateJsonFileFromSqlDb(ListOfProducts); //json file is to reflect sql db at all times
 
                 ListOfProducts = ProductFileManager.DeserializeJsonFileToList(); //allows product stored in file as memory upon start up
 
                 // ProductDataBaseHandler.MakeIdentifyColumnNumberingUpToDate(); //Makes SQL db column for "Identify" in chronological numerical sequence 
 
-                DisplayMenuHandler.DisplayMenu();//Display the menu to user
+                Display.DisplayMenu();//Display the menu to user
 
                 string? input = Console.ReadLine(); //store the users input into variable to determine program flow 
 
@@ -40,9 +41,9 @@ namespace ECommercePlatform
                         ClearFile.ClearAllFiles(ListOfProducts); //clears the file
                         break;
                 case "1": //view all products available
-                        ViewHandler.ViewProduct(ListOfProducts); //views what is in list & JSON file
+                        View.ViewProduct(ListOfProducts); //views what is in list & JSON file
 
-                    ProductDataBaseHandler.ViewSqlDb(); //views what is in db
+                    DataBaseHandler.ViewSqlDb(); //views what is in db
 
                     Console.ReadLine();
                         break;
@@ -52,11 +53,11 @@ namespace ECommercePlatform
                     ProductFileManager.SerializeToJsonFile(ListOfProducts); //Serialize the updated list to the JSON file
                         break;
                 case "3": //remove the product requested by user
-                        DeleteHandler.DeleteProduct(ListOfProducts!);//removes the requested product
+                        Delete.DeleteProduct(ListOfProducts!);//removes the requested product
                     ProductFileManager.SerializeToJsonFile(ListOfProducts);//Serialize the updated list to the JSON file
                         break;  
                 case "4": //update the product requested by user
-                        UpdateHandler.UpdateProduct(ListOfProducts!);//Updates the products name or description in both JSON file and SQL db
+                        Update.UpdateProduct(ListOfProducts!);//Updates the products name or description in both JSON file and SQL db
                         break;
                     default:
                         Console.WriteLine("Invalid input");

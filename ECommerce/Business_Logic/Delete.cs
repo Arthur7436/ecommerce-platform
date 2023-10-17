@@ -10,11 +10,11 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ECommerce.Business_Logic
 {
-    public class DeleteHandler : Main
+    public class Delete : Main
     {
         public static void DeleteProduct(List<Product> ListOfProducts)
         {
-            ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
+            DataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
             cnn.Open();
 
             //collect info from user
@@ -27,7 +27,7 @@ namespace ECommerce.Business_Logic
                 Console.WriteLine(products.ToString());
             }
 
-            ProductDataBaseHandler.ViewSqlDb();
+            DataBaseHandler.ViewSqlDb();
 
             Console.Write("Input: ");
             string userRemovalInput = Console.ReadLine()!;
@@ -41,7 +41,7 @@ namespace ECommerce.Business_Logic
 
                 Console.ReadLine();
 
-                ProductDataBaseHandler.CloseSqlConnection();
+                DataBaseHandler.CloseSqlConnection();
                 return;
             }
 
@@ -64,7 +64,7 @@ namespace ECommerce.Business_Logic
                         adapter.DeleteCommand = new SqlCommand(sql, cnn);
                         adapter.DeleteCommand.ExecuteNonQuery();
 
-                        ProductDataBaseHandler.CloseSqlConnection();
+                        DataBaseHandler.CloseSqlConnection();
 
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Product successfully removed!");

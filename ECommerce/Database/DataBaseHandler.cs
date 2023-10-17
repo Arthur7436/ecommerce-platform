@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ECommerce.Repository
 {
 
-    public class ProductDataBaseHandler
+    public class DataBaseHandler
     {
         public static SqlCommand? command;
         public static SqlDataAdapter? adapter;
@@ -139,7 +139,7 @@ namespace ECommerce.Repository
         }
         public static void ViewSqlDb()
         {
-            ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
+            DataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
 
             //assign connection
             SqlDataReader dataReader;

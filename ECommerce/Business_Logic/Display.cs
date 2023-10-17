@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Business_Logic
 {
-    public class DisplayMenuHandler
+    public class Display
     {
         public static void DisplayMenu()
         {

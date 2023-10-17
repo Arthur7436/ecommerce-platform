@@ -1,4 +1,5 @@
-﻿using ECommerce.Models;
+﻿using ECommerce.FileManagement;
+using ECommerce.Models;
 using ECommerce.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ECommerce.Business_Logic
 {
-    public class UpdateHandler : Main
+    public class Update : Main
     {
         public static void UpdateProduct(List<Product> ListOfProducts)
         {
-            ProductDataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
+            DataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
 
             //Ask the user
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -69,7 +70,7 @@ namespace ECommerce.Business_Logic
                             Console.WriteLine(adapter.UpdateCommand.ExecuteNonQuery());
                             adapter.UpdateCommand.ExecuteNonQuery();
 
-                            ProductDataBaseHandler.CloseSqlConnection();
+                            DataBaseHandler.CloseSqlConnection();
 
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Product name updated!");
@@ -100,7 +101,7 @@ namespace ECommerce.Business_Logic
                             adapter.UpdateCommand = new SqlCommand(sql, cnn);
                             adapter.UpdateCommand.ExecuteNonQuery();
 
-                            ProductDataBaseHandler.CloseSqlConnection();
+                            DataBaseHandler.CloseSqlConnection();
 
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Product description updated!");
