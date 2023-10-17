@@ -1,4 +1,5 @@
-﻿using ECommerce.Models;
+﻿using ECommerce.Database;
+using ECommerce.Models;
 using ECommerce.Repository;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace ECommerce.Business_Logic
                 Console.WriteLine(products.ToString());
             }
 
-            DataBaseHandler.ViewSqlDb();
+            ViewHandler.ViewSqlDb();
 
             Console.Write("Input: ");
             string userRemovalInput = Console.ReadLine()!;
@@ -41,7 +42,7 @@ namespace ECommerce.Business_Logic
 
                 Console.ReadLine();
 
-                DataBaseHandler.CloseSqlConnection();
+                CloseSqlConnection.CloseSql();
                 return;
             }
 
@@ -64,7 +65,7 @@ namespace ECommerce.Business_Logic
                         adapter.DeleteCommand = new SqlCommand(sql, cnn);
                         adapter.DeleteCommand.ExecuteNonQuery();
 
-                        DataBaseHandler.CloseSqlConnection();
+                        CloseSqlConnection.CloseSql();
 
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Product successfully removed!");

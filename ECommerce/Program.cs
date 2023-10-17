@@ -43,7 +43,7 @@ namespace ECommercePlatform
                 case "1": //view all products available
                         View.ViewProduct(ListOfProducts); //views what is in list & JSON file
 
-                    DataBaseHandler.ViewSqlDb(); //views what is in db
+                    ViewHandler.ViewSqlDb(); //views what is in db
 
                     Console.ReadLine();
                         break;

@@ -1,4 +1,5 @@
-﻿using ECommerce.Models;
+﻿using ECommerce.Database;
+using ECommerce.Models;
 using Newtonsoft.Json;
 using System.Data.SqlClient;
 
@@ -65,7 +66,7 @@ namespace ECommerce.Repository
             cnn.Open();
             adapter.InsertCommand.ExecuteNonQuery();
 
-            DataBaseHandler.CloseSqlConnection();
+            CloseSqlConnection.CloseSql();
 
             Console.ReadLine();
         }

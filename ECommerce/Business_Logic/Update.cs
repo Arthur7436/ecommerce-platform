@@ -1,4 +1,5 @@
-﻿using ECommerce.FileManagement;
+﻿using ECommerce.Database;
+using ECommerce.FileManagement;
 using ECommerce.Models;
 using ECommerce.Repository;
 using System;
@@ -70,7 +71,7 @@ namespace ECommerce.Business_Logic
                             Console.WriteLine(adapter.UpdateCommand.ExecuteNonQuery());
                             adapter.UpdateCommand.ExecuteNonQuery();
 
-                            DataBaseHandler.CloseSqlConnection();
+                            CloseSqlConnection.CloseSql();
 
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Product name updated!");
@@ -101,7 +102,7 @@ namespace ECommerce.Business_Logic
                             adapter.UpdateCommand = new SqlCommand(sql, cnn);
                             adapter.UpdateCommand.ExecuteNonQuery();
 
-                            DataBaseHandler.CloseSqlConnection();
+                            CloseSqlConnection.CloseSql();
 
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Product description updated!");

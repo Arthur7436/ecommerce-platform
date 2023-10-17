@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Database
 {
-    internal class ConnectToSqlDB : DataBaseHandler
+    public class ConnectToSqlDB : DataBaseHandler
     {
         public static void ConnectToSqlDb()
         {
