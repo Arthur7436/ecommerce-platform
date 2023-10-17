@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Business_Logic
 {
-    public class View
+    public class Read
     {
         public static void ViewProduct(List<Product> ListOfProducts) //ListOfProducts <List> is already deserialized into a list from the file
         {

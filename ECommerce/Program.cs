@@ -41,7 +41,7 @@ namespace ECommercePlatform
                         ClearFile.ClearAllFiles(ListOfProducts); //clears the file
                         break;
                 case "1": //view all products available
-                        View.ViewProduct(ListOfProducts); //views what is in list & JSON file
+                        Read.ViewProduct(ListOfProducts); //views what is in list & JSON file
 
                     ViewHandler.ViewSqlDb(); //views what is in db
 
@@ -49,7 +49,7 @@ namespace ECommercePlatform
                         break;
                 case "2": //add the product requested by user via the console application
 
-                        ECommerce.Repository.Main.AddProductToListAndSqlDb(ListOfProducts!); //Add product to JSON file and SQL db
+                        Create.AddProductToListAndSqlDb(ListOfProducts!); //Add product to JSON file and SQL db
                     ProductFileManager.SerializeToJsonFile(ListOfProducts); //Serialize the updated list to the JSON file
                         break;
                 case "3": //remove the product requested by user
