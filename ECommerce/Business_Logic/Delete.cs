@@ -28,7 +28,7 @@ namespace ECommerce.Business_Logic
                 Console.WriteLine(products.ToString());
             }
 
-            ViewHandler.ViewSqlDb();
+            ReadHandler.ReadSqlDb();
 
             Console.Write("Input: ");
             string userRemovalInput = Console.ReadLine()!;

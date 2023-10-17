@@ -9,9 +9,9 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ECommerce.Database
 {
-     class ViewHandler : DataBaseHandler
+     class ReadHandler : DataBaseHandler
     {
-        public static void ViewSqlDb()
+        public static void ReadSqlDb()
         {
             DataBaseHandler.SetSqlVariables(out adapter, out sql, out cnn);
 
