@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using System.Data.SqlClient;
 
 
-namespace ECommerce.Repository
+namespace ECommerce.GlobalVariables
 {
     public class Main
     {
@@ -12,6 +12,7 @@ namespace ECommerce.Repository
         public static SqlDataAdapter? adapter;
         public static string? sql;
         public static SqlConnection? cnn;
+
 
     }
 }

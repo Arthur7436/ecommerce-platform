@@ -1,8 +1,8 @@
 ﻿using ECommerce.DAL;
 using ECommerce.DAL.Operations;
 using ECommerce.Database;
+using ECommerce.GlobalVariables;
 using ECommerce.Models;
-using ECommerce.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;

@@ -52,7 +52,8 @@ namespace ECommercePlatform
                         break;
                 case "2": //add the product requested by user via the console application
 
-                        Create.AddProductToListAndSqlDb(ListOfProducts!); //Add product to JSON file and SQL db
+                        Create.AddToList(ListOfProducts!); //Add product to JSON file 
+                        CreateHandler.AddToSqlDb(ListOfProducts); //Add to SQL db
                     ProductFileManager.SerializeToJsonFile(ListOfProducts); //Serialize the updated list to the JSON file
                         break;
                 case "3": //remove the product requested by user
