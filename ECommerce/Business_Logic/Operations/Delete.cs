@@ -15,11 +15,8 @@ namespace ECommerce.Business_Logic.Operations
 {
     public class Delete : Main
     {
-        public static void DeleteProduct(List<Product> ListOfProducts)
+        public static void DeleteFromList(List<Product> ListOfProducts)
         {
-            SqlVariables.SetSqlVariables(out adapter, out sql, out cnn);
-            cnn.Open();
-
             //collect info from user
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Which product would you like to delete?");
@@ -59,21 +56,12 @@ namespace ECommerce.Business_Logic.Operations
                         //remove from list
                         ListOfProducts.RemoveAt(i);
 
-                        //remove product also from sql db
-                        sql = $"Delete dbo.Product where Identify={i + 1}";
-
-                        command = new SqlCommand(sql, cnn);
-                        //cnn.Open();
-                        adapter.DeleteCommand = new SqlCommand(sql, cnn);
-                        adapter.DeleteCommand.ExecuteNonQuery();
-
-                        CloseSqlConnection.CloseSql();
-
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Product successfully removed!");
                         Console.ResetColor();
 
                         Console.ReadLine();
+                        return;
                     }
                 }
             }
