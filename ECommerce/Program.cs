@@ -47,7 +47,6 @@ namespace ECommercePlatform
                         Read.ViewProduct(ListOfProducts); //views what is in list & JSON file
 
                     ReadHandler.ReadSqlDb(); //views what is in db
-
                     Console.ReadLine();
                         break;
                 case "2": //add the product requested by user via the console application
