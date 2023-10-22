@@ -56,7 +56,7 @@ namespace ECommercePlatform
                     ProductFileManager.SerializeToJsonFile(ListOfProducts); //Serialize the updated list to the JSON file
                         break;
                 case "3": //remove the product requested by user
-                     //   Delete.DeleteFromList(ListOfProducts!);//removes product from list
+                        Delete.DeleteFromList(ListOfProducts!);//removes product from list
                         DeleteHandler.DeleteFromSqlDb(ListOfProducts); //removes product form sql db
                     ProductFileManager.SerializeToJsonFile(ListOfProducts);//Serialize the updated list to the JSON file
                         break;  

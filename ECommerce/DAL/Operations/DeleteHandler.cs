@@ -43,6 +43,7 @@ namespace ECommerce.DAL.Operations
                     {
                         if (!ListOfProducts.Any(x => x.NameOfProduct == dbName))
                         {
+                            dataReader.Close();
                             sql = $"Delete from dbo.Product where NameOfProduct='{dbName}'";
                             adapter.DeleteCommand = new SqlCommand(sql, cnn);
                             adapter.DeleteCommand.ExecuteNonQuery();
