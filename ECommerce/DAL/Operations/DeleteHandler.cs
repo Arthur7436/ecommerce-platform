@@ -20,7 +20,7 @@ namespace ECommerce.DAL.Operations
             SqlVariables.SetSqlVariables(out adapter, out sql, out cnn);
             cnn.Open();
 
-            //read all the product names in sql db and store it
+            //read all the product names in sql db and store it in list "listOfProducts"
             //assign connection
             SqlDataReader dataReader;
             string sql1, Output = "";
@@ -32,17 +32,27 @@ namespace ECommerce.DAL.Operations
 
             while (dataReader.Read())
             {
-                //Output = Output + dataReader.GetValue(0) + "\n";
                 for (int i = 0; i < dataReader.FieldCount; i++)
                 {
-                    listOfOutputs.Add(dataReader[i].ToString());
+                    listOfOutputs.Add(dataReader[i].ToString()!);
+                    string dbName = dataReader[i].ToString()!;
+
+
+                    if (!ListOfProducts[i].NameOfProduct.Equals(dbName))
+                    {
+                        dataReader.Close();
+                        //use sql command to delete the product
+                        sql = $"Delete from dbo.Product where NameOfProduct={dbName}";
+
+                        adapter.DeleteCommand = new SqlCommand(sql, cnn);
+                        adapter.DeleteCommand.ExecuteNonQuery();
+
+                        CloseSqlConnection.CloseSql();
+                    }
                 }
             }
 
-            Console.WriteLine(listOfOutputs[0]);
-            Console.WriteLine(listOfOutputs[1]);
-            Console.WriteLine(listOfOutputs[2]);
-
+         
 
 
 
