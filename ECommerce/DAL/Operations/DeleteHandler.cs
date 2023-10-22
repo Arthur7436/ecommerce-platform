@@ -36,8 +36,6 @@ namespace ECommerce.DAL.Operations
                 for (int i = 0; i < dataReader.FieldCount; i++)
                 {
                     listOfOutputs.Add(dataReader[i].ToString()!);
-                    //string dbName = dataReader[i].ToString()!;
-
 
                     foreach (string dbName in listOfOutputs)
                     {
