@@ -20,7 +20,7 @@ namespace ECommerce.DAL.Operations
             SqlVariables.SetSqlVariables(out adapter, out sql, out cnn);
             cnn.Open();
 
-            //read all the product names in sql db and store it in list "listOfProducts"
+            //read all the product names in sql db and store it in list "listOfOutputs"
             //assign connection
             SqlDataReader dataReader;
             string sql1, Output = "";
@@ -37,17 +37,18 @@ namespace ECommerce.DAL.Operations
                     listOfOutputs.Add(dataReader[i].ToString()!);
                     string dbName = dataReader[i].ToString()!;
 
-
+                    //if any of the sql names do not match the names within the list then remove it
                     if (!ListOfProducts[i].NameOfProduct.Equals(dbName))
                     {
                         dataReader.Close();
                         //use sql command to delete the product
-                        sql = $"Delete from dbo.Product where NameOfProduct={dbName}";
+                        sql = $"Delete from dbo.Product where NameOfProduct='{dbName}'";
 
                         adapter.DeleteCommand = new SqlCommand(sql, cnn);
                         adapter.DeleteCommand.ExecuteNonQuery();
 
                         CloseSqlConnection.CloseSql();
+                        return;
                     }
                 }
             }
