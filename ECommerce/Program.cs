@@ -61,7 +61,8 @@ namespace ECommercePlatform
                     ProductFileManager.SerializeToJsonFile(ListOfProducts);//Serialize the updated list to the JSON file
                         break;  
                 case "4": //update the product requested by user
-                        Update.UpdateProduct(ListOfProducts!);//Updates the products name or description in both JSON file and SQL db
+                        Update.UpdateProductInList(ListOfProducts!);//Updates the products name or description in both JSON file and SQL db
+                        //UpdateHandler.UpdateProductInSqlDb();
                         break;
                     default:
                         Console.WriteLine("Invalid input");

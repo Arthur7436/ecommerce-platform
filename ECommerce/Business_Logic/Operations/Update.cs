@@ -1,4 +1,5 @@
 ﻿using ECommerce.DAL;
+using ECommerce.DAL.Operations;
 using ECommerce.Database;
 using ECommerce.FileManagement;
 using ECommerce.GlobalVariables;
@@ -15,7 +16,7 @@ namespace ECommerce.Business_Logic.Operations
 {
     public class Update : Main
     {
-        public static void UpdateProduct(List<Product> ListOfProducts)
+        public static void UpdateProductInList(List<Product> ListOfProducts)
         {
             SqlVariables.SetSqlVariables(out adapter, out sql, out cnn);
 
@@ -62,22 +63,10 @@ namespace ECommerce.Business_Logic.Operations
                         {
                             ListOfProducts[i].NameOfProduct = newProductName;
                             ProductFileManager.SerializeToJsonFile(ListOfProducts); //serialize to json file so that it would not be overwritten at the start of Main Program
-                            //update in sql db
-                            cnn.Open();
-                            sql = "Update dbo.Product set NameOfProduct='" + $"{newProductName}" + $"' where Identify={i + 1}"; //Update the column NameOfProduct at the row of that product
+                            Console.WriteLine("Name updated!");
 
-                            command = new SqlCommand(sql, cnn);
-
-                            adapter.UpdateCommand = new SqlCommand(sql, cnn);
-                            Console.WriteLine(adapter.UpdateCommand.ExecuteNonQuery());
-                            adapter.UpdateCommand.ExecuteNonQuery();
-
-                            CloseSqlConnection.CloseSql();
-
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Product name updated!");
-                            Console.ResetColor();
-                            Thread.Sleep(500);
+                            ////update in sql db
+                            UpdateHandler.UpdateProductNameInSqlDb(newProductName, i);
                         }
                     }
                 }
@@ -93,22 +82,10 @@ namespace ECommerce.Business_Logic.Operations
                         {
                             ListOfProducts[i].Description = newProductDescription;
                             ProductFileManager.SerializeToJsonFile(ListOfProducts); //serialize to json file so that it would not be overwritten
+                            Console.WriteLine("Description updated!");
 
                             //update in sql db
-                            cnn.Open();
-                            sql = "Update dbo.Product set Description='" + $"{newProductDescription}" + $"' where Identify={i + 1}"; //Update the column Description at the row of that product
-
-                            command = new SqlCommand(sql, cnn);
-
-                            adapter.UpdateCommand = new SqlCommand(sql, cnn);
-                            adapter.UpdateCommand.ExecuteNonQuery();
-
-                            CloseSqlConnection.CloseSql();
-
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Product description updated!");
-                            Console.ResetColor();
-                            Thread.Sleep(500);
+                            UpdateHandler.UpdateProductDescriptionInSqlDb(newProductDescription, i);
                         }
                     }
                 }
