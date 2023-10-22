@@ -16,6 +16,7 @@ namespace ECommerce.DAL.Operations
     {
         public static void DeleteFromSqlDb(List<Product> ListOfProducts)
         {
+            List<string> listOfOutputs = new List<string>(); //list to store all the existing values in sql column "NameOfProduct"
             SqlVariables.SetSqlVariables(out adapter, out sql, out cnn);
             cnn.Open();
 
@@ -31,10 +32,19 @@ namespace ECommerce.DAL.Operations
 
             while (dataReader.Read())
             {
-                Output = Output + dataReader.GetValue(0) + "\n";
+                //Output = Output + dataReader.GetValue(0) + "\n";
+                for (int i = 0; i < dataReader.FieldCount; i++)
+                {
+                    listOfOutputs.Add(dataReader[i].ToString());
+                }
             }
 
-            Console.WriteLine(Output);
+            Console.WriteLine(listOfOutputs[0]);
+            Console.WriteLine(listOfOutputs[1]);
+            Console.WriteLine(listOfOutputs[2]);
+
+
+
 
 
 
