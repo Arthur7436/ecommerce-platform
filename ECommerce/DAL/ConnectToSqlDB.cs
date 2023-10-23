@@ -43,7 +43,7 @@ namespace ECommerce.Database
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Cannot open connection... ");
                 Console.ResetColor();
-                Thread.Sleep(3000);
+                Thread.Sleep(1000);
                 Environment.Exit(0); //exit program
             }
         }
