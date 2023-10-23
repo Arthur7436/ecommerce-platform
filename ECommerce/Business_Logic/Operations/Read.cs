@@ -19,29 +19,26 @@ namespace ECommerce.Business_Logic.Operations
 
         public static void DisplayText(string message)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(message);
+            Console.ResetColor();
         }
         
         public static void ViewProduct(List<Product> ListOfProducts) //ListOfProducts <List> is already deserialized into a list from the file
         {
             if (ListOfProducts == null || ListOfProducts.Count == 0) //give error message if list is empty
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
                 displayDelegate("No products to view!");
-                Console.ResetColor();
-
                 Console.ReadLine();
             }
             else //list all the products
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
                 displayDelegate("Here is the list of all products:");
-                Console.ResetColor();
 
                 //display all objects within List
                 foreach (Product products in ListOfProducts)
                 {
-                    displayDelegate(products.ToString());
+                    Console.WriteLine(products.ToString());
                 }
 
             }
