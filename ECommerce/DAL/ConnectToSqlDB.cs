@@ -15,7 +15,7 @@ namespace ECommerce.Database
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Storage of password in variable was successful...");
             Console.ResetColor();
-            Thread.Sleep(50);
+            Thread.Sleep(10);
 
 
             //Attempt to connect console application to server database
@@ -35,7 +35,7 @@ namespace ECommerce.Database
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Connection to SQL database was successful... ");
                 Console.ResetColor();
-                Thread.Sleep(50);
+                Thread.Sleep(10);
                 //cnn.Close(); Move this to TurnOffConnectionToDb method when user enters q
             }
             catch (Exception ex) //if connection to db is unsuccessful
