@@ -1,6 +1,6 @@
 ﻿namespace ECommerceAPI.Controllers
 {
-    public class ReadController
+    public class DeleteController
     {
     }
 }
