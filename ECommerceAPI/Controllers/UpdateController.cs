@@ -21,7 +21,7 @@ namespace ECommerceAPI.Controllers
             string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
             string connectionString = null!;
             SqlConnection cnn;
-            connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
+            connectionString = $"Data Source={DataBaseHandler.dataSourceName};Initial Catalog={DataBaseHandler.dataBase};User ID={DataBaseHandler.username};Password={DataBaseHandler.pwd}";
             cnn = new SqlConnection(connectionString);
 
             //go through the sql db, specifically the Identify column
