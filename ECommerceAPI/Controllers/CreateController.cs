@@ -36,7 +36,7 @@ namespace ECommerceAPI.Controllers
             SqlDataAdapter adapter = new SqlDataAdapter();
             String sql = "select * from dbo.Product";
 
-            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
+            //string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
             string connectionString = null!;
             SqlConnection cnn;
             //connectionString = $"Data Source=AUL0953;Initial Catalog=ProductDB;User ID=sa;Password={pwd}";
@@ -65,18 +65,28 @@ namespace ECommerceAPI.Controllers
             //find the exact amount of products in the list
             int numOfProducts = products.Count();
 
-            //store the var in sql str below
-            sql = $"Insert into dbo.Product (Identify,Id,NameOfProduct,Description) values('" + $"{numOfProducts + 1}" + "', '" + $"{product.Id}" + "', '" + $"{product.NameOfProduct}" + "' , '" + $"{product.Description}" + "')";
-            cnn.Open();
-            command = new SqlCommand(sql, cnn);
-            adapter.InsertCommand = new SqlCommand(sql, cnn);
+            //if duplicate then return error
+            if (products.Any(x => x.Id == product.Id))
+            {
+                return BadRequest("This is a duplicate");
+            }
+            else
+            {
+                //else add to db
 
-            adapter.InsertCommand.ExecuteNonQuery();
+                //store the var in sql str below
+                sql = $"Insert into dbo.Product (Identify,Id,NameOfProduct,Description) values('" + $"{numOfProducts + 1}" + "', '" + $"{product.Id}" + "', '" + $"{product.NameOfProduct}" + "' , '" + $"{product.Description}" + "')";
+                cnn.Open();
+                command = new SqlCommand(sql, cnn);
+                adapter.InsertCommand = new SqlCommand(sql, cnn);
 
-            command.Dispose();
-            cnn.Close();
+                adapter.InsertCommand.ExecuteNonQuery();
 
-            return Ok($"Created successfully");
+                command.Dispose();
+                cnn.Close();
+
+                return Ok($"Created successfully");
+            }
         }
     }
 }
