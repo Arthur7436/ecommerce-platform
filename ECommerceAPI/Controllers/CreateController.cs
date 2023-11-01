@@ -85,7 +85,7 @@ namespace ECommerceAPI.Controllers
                 command.Dispose();
                 cnn.Close();
 
-                return Ok($"Created successfully");
+                return Ok("Created successfully");
             }
         }
     }

@@ -70,7 +70,7 @@ namespace ECommerceAPI.Controllers
                 cnn.Close();
             }
 
-            return Ok("deleted successfully");
+            return Ok("Deleted successfully");
 
         }
     }

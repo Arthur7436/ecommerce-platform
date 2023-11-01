@@ -70,7 +70,8 @@ namespace ECommerceAPI.Controllers
             //string json = JsonConvert.SerializeObject(products, Formatting.Indented);
             string json = JsonConvert.SerializeObject(products, Formatting.Indented);
 
-            return Ok(json);
+            return Ok($"Reading database successful! \n {json}");
+            
 
         }
     }

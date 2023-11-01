@@ -18,7 +18,7 @@ namespace ECommerceAPI.Controllers
             SqlDataAdapter adapter = new SqlDataAdapter();
             String sql = "select * from dbo.Product";
 
-            string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
+            //string pwd = Environment.GetEnvironmentVariable("SQL_PASSWORD", EnvironmentVariableTarget.Machine)!;
             string connectionString = null!;
             SqlConnection cnn;
             connectionString = $"Data Source={DataBaseHandler.dataSourceName};Initial Catalog={DataBaseHandler.dataBase};User ID={DataBaseHandler.username};Password={DataBaseHandler.pwd}";
@@ -56,8 +56,9 @@ namespace ECommerceAPI.Controllers
 
             if (update != null)
             {
-                sql = $"update dbo.Product set NameOfProduct = '{newName}', Description = '{newDescription}' where Identify={index + 1}";
+                //sql = $"update dbo.Product set NameOfProduct = '{newName}', Description = '{newDescription}' where Identify={index + 1}";
                 //sql = "Update dbo.Product set NameOfProduct='" + $" values {newName}" + $"{newDescription}" + $"' where Identify={index + 1}";
+                sql = $"UPDATE dbo.Product SET NameOfProduct = '{newName}', Description = '{newDescription}' where Id='{update.Id}'";
 
                 cnn.Open();
                 command = new SqlCommand(sql, cnn);
@@ -66,13 +67,19 @@ namespace ECommerceAPI.Controllers
 
                 cnn.Dispose();
                 cnn.Close();
+
+                return Ok("Product updated successfully!");
+            }
+            else
+            {
+                return BadRequest("Update failed");
             }
 
 
             //update the product based on product name
 
 
-            return Ok();
+            
         }
     }
 }
