@@ -15,7 +15,7 @@ namespace ECommercePlatform
         static void Main(string[] args)
         {
             List<Product> ListOfProducts = new List<Product>(); //create a list to store all products inside
-            ConnectToSqlDB.ConnectToSqlDb(); //connect program to databaseeeee
+            ConnectToSqlDB.ConnectToSqlDb(); //connect program to databaseeeeee
             CheckForFileAndDirectory.CheckForDirectory();
             CheckForFileAndDirectory.CheckForFile(); 
 
