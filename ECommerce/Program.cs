@@ -7,6 +7,7 @@ using ECommerce.FileManagement;
 using ECommerce.Models;
 using ECommerce.Repository;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace ECommercePlatform
 {
@@ -17,11 +18,12 @@ namespace ECommercePlatform
             List<Product> ListOfProducts = new List<Product>(); //create a list to store all products inside
             ConnectToSqlDB.ConnectToSqlDb(); //connect program to databasee
             CheckForFileAndDirectory.CheckForDirectory();
-            CheckForFileAndDirectory.CheckForFile(); 
+            CheckForFileAndDirectory.CheckForFile();
+
+            UpdateJsonFile.InstantiateJsonFileFromSqlDb(ListOfProducts); //json file is to reflect sql db at all times
 
             do
             {
-                UpdateJsonFile.InstantiateJsonFileFromSqlDb(ListOfProducts); //json file is to reflect sql db at all times
 
                 ListOfProducts = ProductFileManager.DeserializeJsonFileToList(); //allows product stored in file as memory upon start up
 
@@ -34,7 +36,7 @@ namespace ECommercePlatform
                 switch (input)
                 {
                     case "q": //quit the program
-                
+
                         Environment.Exit(0);
                         return; //close the program
 
@@ -42,32 +44,36 @@ namespace ECommercePlatform
 
                         ClearList.ClearAllList(ListOfProducts); //clears the list
                         ClearFile.ClearAllFiles(ListOfProducts); //clears the file
+                        ListOfProducts = ProductFileManager.DeserializeJsonFileToList();
+
+                        DeleteAllSqlData.DeleteAllFromSqlDb();
+
                         break;
-                case "1": //view all products available
+                    case "1": //view all products available
                         Read.ViewProduct(ListOfProducts); //views what is in list & JSON file
 
-                    ReadHandler.ReadSqlDb(); //views what is in db
-                    Console.ReadLine();
+                        ReadHandler.ReadSqlDb(); //views what is in db
+                        Console.ReadLine();
                         break;
-                case "2": //add the product requested by user via the console application
+                    case "2": //add the product requested by user via the console application
 
                         Create.AddToList(ListOfProducts!); //Add product to JSON file 
                         CreateHandler.AddToSqlDb(ListOfProducts); //Add to SQL db
-                    ProductFileManager.SerializeToJsonFile(ListOfProducts); //Serialize the updated list to the JSON file
+                        ProductFileManager.SerializeToJsonFile(ListOfProducts); //Serialize the updated list to the JSON file
                         break;
-                case "3": //remove the product requested by user
+                    case "3": //remove the product requested by user
                         Delete.DeleteFromList(ListOfProducts!);//removes product from list
                         DeleteHandler.DeleteFromSqlDb(ListOfProducts); //removes product form sql db
-                    ProductFileManager.SerializeToJsonFile(ListOfProducts);//Serialize the updated list to the JSON file
-                        break;  
-                case "4": //update the product requested by user
+                        ProductFileManager.SerializeToJsonFile(ListOfProducts);//Serialize the updated list to the JSON file
+                        break;
+                    case "4": //update the product requested by user
                         Update.UpdateProductInList(ListOfProducts!);//Updates the products name or description in both JSON file and SQL db
                         //UpdateHandler.UpdateProductInSqlDb();
                         break;
                     default:
                         Console.WriteLine("Invalid input");
                         break;
-            }
+                }
             } while (true);
         }
     }

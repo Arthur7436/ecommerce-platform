@@ -29,7 +29,7 @@ namespace ECommerce.Business_Logic.Operations
             if (ListOfProducts == null || ListOfProducts.Count == 0) //give error message if list is empty
             {
                 displayDelegate("No products to view!");
-                Console.ReadLine();
+                
             }
             else //list all the products
             {
