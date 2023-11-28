@@ -15,28 +15,32 @@ namespace ECommerce.DAL.Operations
     {
         public static void AddToSqlDb(List<Product> ListOfProducts)
         {
+            SqlVariables.SetSqlVariables(out var adapter, out var sql, out var cnn);
+            command = new SqlCommand(sql, cnn);
+            cnn.Open();
 
-            SqlVariables.SetSqlVariables(out adapter, out sql, out cnn);
+            // Assuming the last product in the list is the new one to be added
+            var newProduct = ListOfProducts.LastOrDefault();
 
-            //access the last product in list
-            var product = ListOfProducts.LastOrDefault();
-
-
-            //Loop through the list and find the row number + Id + NameOfProduct + Description in order to be sent to sql db
-            for (int i = 0; i < ListOfProducts.Count; i++)
+            if (newProduct != null)
             {
-                sql = $"Insert into dbo.Product (Identify,Id,NameOfProduct,Description) values({i + 1},'" + $"{product.Id}" + "', '" + $"{product.NameOfProduct}" + "' , '" + $"{product.Description}" + "')";
+                // Check if the product already exists in the database
+                command.CommandText = $"SELECT COUNT(*) FROM dbo.Product WHERE Id = '{newProduct.Id}'";
+                int count = (int)command.ExecuteScalar();
+
+                if (count == 0)
+                {
+                    // Insert the new product as it does not exist in the database
+                    command.CommandText = $"Insert into dbo.Product (Identify, Id, NameOfProduct, Description) values({ListOfProducts.Count}, '{newProduct.Id}', '{newProduct.NameOfProduct}', '{newProduct.Description}')";
+                    command.ExecuteNonQuery();
+                }
             }
 
-            //push the product into sql db
-            command = new SqlCommand(sql, cnn);
-            adapter.InsertCommand = new SqlCommand(sql, cnn);
-            cnn.Open();
-            adapter.InsertCommand.ExecuteNonQuery();
-
-            CloseSqlConnection.CloseSql();
-
-            Console.ReadLine();
+            cnn.Close();
         }
     }
 }
+
+
+
+

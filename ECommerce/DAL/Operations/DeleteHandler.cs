@@ -17,42 +17,31 @@ namespace ECommerce.DAL.Operations
     {
         public static void DeleteFromSqlDb(List<Product> ListOfProducts)
         {
-            List<string> listOfOutputs = new List<string>(); //list to store all the existing values in sql column "NameOfProduct"
-            SqlVariables.SetSqlVariables(out adapter, out sql, out cnn);
+            SqlVariables.SetSqlVariables(out var adapter, out var sql, out var cnn);
+
             cnn.Open();
-
-            //read all the product names in sql db and store it in list "listOfOutputs"
-            //assign connection
-            SqlDataReader dataReader;
-            string sql1, Output = "";
-
-            //cnn = new SqlConnection(connectionString);
-            command = new SqlCommand(sql, cnn);
+            command = new SqlCommand(sql,cnn);
             command.CommandText = "Select NameOfProduct from dbo.Product";
-            dataReader = command.ExecuteReader();
 
-            while (dataReader.Read())
+            var existingProductNames = new List<string>();
+            using (var dataReader = command.ExecuteReader())
             {
-                for (int i = 0; i < dataReader.FieldCount; i++)
+                while (dataReader.Read())
                 {
-                    listOfOutputs.Add(dataReader[i].ToString()!);
-
-                    foreach (string dbName in listOfOutputs)
-                    {
-                        if (!ListOfProducts.Any(x => x.NameOfProduct == dbName))
-                        {
-                            dataReader.Close();
-                            sql = $"Delete from dbo.Product where NameOfProduct='{dbName}'";
-                            adapter.DeleteCommand = new SqlCommand(sql, cnn);
-                            adapter.DeleteCommand.ExecuteNonQuery();
-
-                            CloseSqlConnection.CloseSql();
-                            return;
-
-                        }
-                    }
+                    existingProductNames.Add(dataReader.GetString(0));
                 }
             }
+
+            foreach (var productName in existingProductNames)
+            {
+                if (!ListOfProducts.Any(p => p.NameOfProduct == productName))
+                {
+                    command.CommandText = $"Delete from dbo.Product where NameOfProduct='{productName}'";
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            cnn.Close();
         }
     }
 }

@@ -9,37 +9,43 @@ using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
+
 namespace ECommerce.DAL.Operations
 {
     class ReadHandler : DataBaseHandler
     {
         public static void ReadSqlDb()
         {
-            SqlVariables.SetSqlVariables(out adapter, out sql, out cnn);
+            // Assuming SqlVariables.SetSqlVariables initializes and sets up the SQL connection (cnn) and command (command)
+            SqlVariables.SetSqlVariables(out var adapter, out var sql, out var cnn);
 
-            //assign connection
-            SqlDataReader dataReader;
-            string sql1, Output = "";
-
-            //cnn = new SqlConnection(connectionString);
+            // Open the connection
             cnn.Open();
-            command = new SqlCommand(sql, cnn);
-            command.CommandText = "Select Identify,Id,NameOfProduct,Description from dbo.Product";
-            dataReader = command.ExecuteReader();
 
-            while (dataReader.Read())
+            // Prepare the SQL command
+            SqlCommand command = new SqlCommand("Select Identify, Id, NameOfProduct, Description from dbo.Product", cnn);
+
+            // Execute the command and process results
+            using (var dataReader = command.ExecuteReader())
             {
-                Output = Output + dataReader.GetValue(0) + " - " + dataReader.GetValue(1) + " - " + dataReader.GetValue(2) + " - " + dataReader.GetValue(3) + "\n";
+                var output = new StringBuilder();
+
+                while (dataReader.Read())
+                {
+                    output.AppendLine($"{dataReader.GetValue(0)} - {dataReader.GetValue(1)} - {dataReader.GetValue(2)} - {dataReader.GetValue(3)}");
+                }
+
+                // Display results
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("SQL database:");
+                Console.ResetColor();
+                Console.WriteLine(output.ToString());
             }
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("SQL database:");
-            Console.ResetColor();
-            Console.WriteLine(Output);
-
-            dataReader.Close();
-
-            CloseSqlConnection.CloseSql();
+            // Close the connection
+            cnn.Close();
         }
     }
 }
+
+

@@ -1,27 +1,39 @@
 ﻿using ECommerce.Business_Logic.Operations;
-using ECommerce.Database;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Threading;
 
 namespace ECommerce.DAL.Operations
 {
     public class UpdateHandler : Update
     {
-        public static void UpdateProductDescriptionInSqlDb(string? newProductDescription, int i)
+        private static string GetConnectionString()
         {
-            cnn.Open();
-            sql = "Update dbo.Product set Description='" + $"{newProductDescription}" + $"' where Identify={i + 1}"; //Update the column Description at the row of that product
+            string username = File.ReadAllText(@"C:\ProjectSecrets\username.txt");
+            string dataSource = File.ReadAllText(@"C:\ProjectSecrets\dataSourceName.txt");
+            string password = File.ReadAllText(@"C:\ProjectSecrets\EcommerceSecrets.txt");
+            string dataBase = "dbProduct";
 
-            command = new SqlCommand(sql, cnn);
+            return $"Data Source={dataSource};Initial Catalog={dataBase};User ID={username};Password={password}";
+        }
 
-            adapter.UpdateCommand = new SqlCommand(sql, cnn);
-            adapter.UpdateCommand.ExecuteNonQuery();
+        public static void UpdateProductDescriptionInSqlDb(string newProductDescription, int i)
+        {
+            string connectionString = GetConnectionString();
+            string sql = "Update dbo.Product set Description = @desc where Identify = @id";
 
-            CloseSqlConnection.CloseSql();
+            using (SqlConnection cnn = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(sql, cnn))
+                {
+                    command.Parameters.AddWithValue("@desc", newProductDescription);
+                    command.Parameters.AddWithValue("@id", i + 1);
+
+                    cnn.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Product description updated!");
@@ -29,18 +41,22 @@ namespace ECommerce.DAL.Operations
             Thread.Sleep(500);
         }
 
-        public static void UpdateProductNameInSqlDb(string? newProductName, int i)
+        public static void UpdateProductNameInSqlDb(string newProductName, int i)
         {
-            cnn.Open();
-            sql = "Update dbo.Product set NameOfProduct='" + $"{newProductName}" + $"' where Identify={i + 1}"; //Update the column NameOfProduct at the row of that product
+            string connectionString = GetConnectionString();
+            string sql = "Update dbo.Product set NameOfProduct = @name where Identify = @id";
 
-            command = new SqlCommand(sql, cnn);
+            using (SqlConnection cnn = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(sql, cnn))
+                {
+                    command.Parameters.AddWithValue("@name", newProductName);
+                    command.Parameters.AddWithValue("@id", i + 1);
 
-            adapter.UpdateCommand = new SqlCommand(sql, cnn);
-            Console.WriteLine(adapter.UpdateCommand.ExecuteNonQuery());
-            adapter.UpdateCommand.ExecuteNonQuery();
-
-            CloseSqlConnection.CloseSql();
+                    cnn.Open();
+                    Console.WriteLine(command.ExecuteNonQuery());
+                }
+            }
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Product name updated!");
@@ -49,3 +65,6 @@ namespace ECommerce.DAL.Operations
         }
     }
 }
+
+
+

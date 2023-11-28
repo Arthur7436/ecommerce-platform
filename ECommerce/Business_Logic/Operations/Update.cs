@@ -18,6 +18,7 @@ namespace ECommerce.Business_Logic.Operations
     {
         public static void UpdateProductInList(List<Product> ListOfProducts)
         {
+
             //SqlVariables.SetSqlVariables(out adapter, out sql, out cnn);
 
             //Ask the user
