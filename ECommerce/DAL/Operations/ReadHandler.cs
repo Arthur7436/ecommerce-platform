@@ -35,6 +35,10 @@ namespace ECommerce.DAL.Operations
                     output.AppendLine($"{dataReader.GetValue(0)} - {dataReader.GetValue(1)} - {dataReader.GetValue(2)} - {dataReader.GetValue(3)}");
                 }
 
+                //if db empty then say it is empty
+             
+
+                //else
                 // Display results
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("SQL database:");

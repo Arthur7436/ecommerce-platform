@@ -17,20 +17,18 @@ namespace ECommercePlatform
         {
             List<Product> ListOfProducts = new List<Product>(); //create a list to store all products inside
             ConnectToSqlDB.ConnectToSqlDb(); //connect program to databasee
-            CheckForFileAndDirectory.CheckForDirectory();
-            CheckForFileAndDirectory.CheckForFile();
+            CheckForFileAndDirectory.CheckForDirectory(); //if there is no directory, then it is created
+            CheckForFileAndDirectory.CheckForFile(); //if there is no file, then it is created
 
             UpdateJsonFile.InstantiateJsonFileFromSqlDb(ListOfProducts); //json file is to reflect sql db at all times
 
-            do
+            do //continue the program until user wants to quit
             {
-
+                
                 ListOfProducts = ProductFileManager.DeserializeJsonFileToList(); //allows product stored in file as memory upon start up
 
-                //order sql db identify column to be chronological order
+                //order sql db identify column to be chronological order, if this is gone identify column is incorrect
                 NumberingColumn.MakeIdentifyColumnNumberingUpToDate();
-
-                //NumberingColumn.MakeIdentifyColumnNumberingUpToDate(); //Makes SQL db column for "Identify" in chronological numerical sequence 
 
                 Display.DisplayMenu();//Display the menu to user
 
@@ -43,13 +41,13 @@ namespace ECommercePlatform
                         Environment.Exit(0);
                         return; //close the program
 
-                    case "r": //reset program memory
+                    case "r": //reset program memory and remove all data
 
                         ClearList.ClearAllList(ListOfProducts); //clears the list
                         ClearFile.ClearAllFiles(ListOfProducts); //clears the file
                         ListOfProducts = ProductFileManager.DeserializeJsonFileToList();
 
-                        DeleteAllSqlData.DeleteAllFromSqlDb();
+                        DeleteAllSqlData.DeleteAllFromSqlDb(); //clears the sql db
 
                         break;
                     case "1": //view all products available
