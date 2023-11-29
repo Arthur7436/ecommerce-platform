@@ -12,20 +12,20 @@ namespace ECommerce.DAL
 {
     public class NumberingColumn : SqlVariables
     {
-        //public static void MakeIdentifyColumnNumberingUpToDate()
-        //{
-        //    SetSqlVariables(out adapter, out sql, out cnn);
+        public static void MakeIdentifyColumnNumberingUpToDate()
+        {
+            SetSqlVariables(out adapter, out sql, out cnn);
 
-        //    cnn.Open();
+            cnn.Open();
 
-        //    //Make Identify to be sequential numbering
-        //    sql = "DECLARE @id varchar(255) SET @id = 0 UPDATE dbo.Product SET @id = Identify = @id + 1";
+            //Make Identify to be sequential numbering
+            sql = "DECLARE @id varchar(255) SET @id = 0 UPDATE dbo.Product SET @id = Identify = @id + 1";
 
-        //    command = new SqlCommand(sql, cnn);
-        //    adapter.UpdateCommand = new SqlCommand(sql, cnn);
-        //    adapter.UpdateCommand.ExecuteNonQuery();
+            command = new SqlCommand(sql, cnn);
+            adapter.UpdateCommand = new SqlCommand(sql, cnn);
+            adapter.UpdateCommand.ExecuteNonQuery();
 
-        //    CloseSqlConnection.CloseSql();
-        //}
+            CloseSqlConnection.CloseSql();
+        }
     }
 }

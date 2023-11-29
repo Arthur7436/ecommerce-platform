@@ -27,6 +27,9 @@ namespace ECommercePlatform
 
                 ListOfProducts = ProductFileManager.DeserializeJsonFileToList(); //allows product stored in file as memory upon start up
 
+                //order sql db identify column to be chronological order
+                NumberingColumn.MakeIdentifyColumnNumberingUpToDate();
+
                 //NumberingColumn.MakeIdentifyColumnNumberingUpToDate(); //Makes SQL db column for "Identify" in chronological numerical sequence 
 
                 Display.DisplayMenu();//Display the menu to user
