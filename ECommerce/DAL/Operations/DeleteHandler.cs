@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ECommerce.DAL.Operations
@@ -21,6 +22,7 @@ namespace ECommerce.DAL.Operations
 
             cnn.Open();
             command = new SqlCommand(sql,cnn);
+            //command.CommandText = "Select NameOfProduct from dbo.Product";
             command.CommandText = "Select NameOfProduct from dbo.Product";
 
             var existingProductNames = new List<string>();
@@ -36,7 +38,10 @@ namespace ECommerce.DAL.Operations
             {
                 if (!ListOfProducts.Any(p => p.NameOfProduct == productName))
                 {
-                    command.CommandText = $"Delete from dbo.Product where NameOfProduct='{productName}'";
+                    command.CommandText = $"Delete from dbo.Product where NameOfProduct= @productName";
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("@productName", productName);
+
                     command.ExecuteNonQuery();
                 }
             }
