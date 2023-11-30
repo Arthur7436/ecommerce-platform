@@ -25,13 +25,25 @@ namespace ECommerce.DAL.Operations
             if (newProduct != null)
             {
                 // Check if the product already exists in the database
-                command.CommandText = $"SELECT COUNT(*) FROM dbo.Product WHERE Id = '{newProduct.Id}'";
+                //command.CommandText = $"SELECT COUNT(*) FROM dbo.Product WHERE Id = '{newProduct.Id}'";
+                command.CommandText = "SELECT COUNT(*) FROM dbo.Product WHERE Id = @Id";
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("@Id", newProduct.Id);
+
                 int count = (int)command.ExecuteScalar();
 
                 if (count == 0)
                 {
                     // Insert the new product as it does not exist in the database
-                    command.CommandText = $"Insert into dbo.Product (Identify, Id, NameOfProduct, Description) values({ListOfProducts.Count}, '{newProduct.Id}', '{newProduct.NameOfProduct}', '{newProduct.Description}')";
+                    //command.CommandText = $"Insert into dbo.Product (Identify, Id, NameOfProduct, Description) values({ListOfProducts.Count}, '{newProduct.Id}', '{newProduct.NameOfProduct}', '{newProduct.Description}')";
+                    // Parameterized query to insert new product
+                    command.CommandText = "Insert into dbo.Product (Identify, Id, NameOfProduct, Description) values(@Identify, @Id, @NameOfProduct, @Description)";
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("@Identify", ListOfProducts.Count);
+                    command.Parameters.AddWithValue("@Id", newProduct.Id); // Re-add the Id parameter for the insert query
+                    command.Parameters.AddWithValue("@NameOfProduct", newProduct.NameOfProduct);
+                    command.Parameters.AddWithValue("@Description", newProduct.Description);
+
                     command.ExecuteNonQuery();
                 }
             }
