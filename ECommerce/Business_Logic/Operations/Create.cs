@@ -52,6 +52,52 @@ namespace ECommerce.Business_Logic.Operations
             Console.WriteLine("Product added!");
             Console.ResetColor();
         }
-        
+
+        // New method to create an order
+        public static void CreateOrder(List<Order> ListOfOrders, List<Product> ListOfProducts)
+        {
+            Order newOrder = new Order
+            {
+                OrderId = Guid.NewGuid().ToString("N"),
+                OrderDate = DateTime.Now
+            };
+
+            Console.WriteLine("Creating a new order. Please add products to this order by entering their name.");
+
+            while (true)
+            {
+                Console.WriteLine("Enter product ID to add (or 'done' to finish):");
+                string input = Console.ReadLine();
+
+                if (input.ToLower() == "done")
+                {
+                    break;
+                }
+
+                Product productToAdd = ListOfProducts.Find(p => p.NameOfProduct == input);
+                if (productToAdd != null)
+                {
+                    newOrder.Products.Add(productToAdd);
+                    Console.WriteLine($"Product {productToAdd.NameOfProduct} added.");
+                }
+                else
+                {
+                    Console.WriteLine("Product not found.");
+                }
+            }
+
+            if (newOrder.Products.Count > 0)
+            {
+                ListOfOrders.Add(newOrder);
+                Console.WriteLine($"Order {newOrder.OrderId} created with {newOrder.Products.Count} products.");
+            }
+            else
+            {
+                Console.WriteLine("No products added. Order not created.");
+            }
+        }
     }
 }
+
+
+

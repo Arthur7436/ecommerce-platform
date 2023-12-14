@@ -16,6 +16,7 @@ namespace ECommercePlatform
         static void Main(string[] args)
         {
             List<Product> ListOfProducts = new List<Product>(); //create a list to store all products inside
+            List<Order> ListOfOrders = new List<Order>();
             ConnectToSqlDB.ConnectToSqlDb(); //connect program to databasee
             CheckForFileAndDirectory.CheckForDirectory(); //if there is no directory, then it is created
             CheckForFileAndDirectory.CheckForFile(); //if there is no file, then it is created
@@ -61,6 +62,7 @@ namespace ECommercePlatform
                         Create.AddToList(ListOfProducts!); //Add product to JSON file 
                         CreateHandler.AddToSqlDb(ListOfProducts); //Add to SQL db
                         ProductFileManager.SerializeToJsonFile(ListOfProducts); //Serialize the updated list to the JSON file
+                        Create.CreateOrder(ListOfOrders,ListOfProducts);
                         break;
                     case "3": //remove the product requested by user
                         Delete.DeleteFromList(ListOfProducts!);//removes product from list
