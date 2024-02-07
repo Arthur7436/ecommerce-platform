@@ -43,7 +43,7 @@ namespace ECommerce.FileManagement
                 {
                     return;
                 }
-                using (FileStream fs = File.Create(filePath)) ; //create the file
+                using (FileStream fs = File.Create(filePath)); //create the file
             }
             catch (Exception e)
             {

@@ -18,13 +18,14 @@ namespace ECommerce.Database
             Console.ResetColor();
             Thread.Sleep(10);
 
+            DataBaseHandler database = new DataBaseHandler();
 
             //Attempt to connect console application to server database
 
             //variable declaration
             string connectionString = null!;
             SqlConnection cnn;
-            connectionString = $"Data Source={dataSource};Initial Catalog={dataBase};User ID={username};Password={pwd}";
+            connectionString = $"Data Source={dataSource};Initial Catalog={dataBase};User ID={database.username};Password={pwd}";
 
             //assign connection
             cnn = new SqlConnection(connectionString);
