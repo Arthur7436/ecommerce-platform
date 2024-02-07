@@ -22,7 +22,7 @@ namespace ECommercePlatform
             CheckForFileAndDirectory.CheckForFile(); //if there is no file, then it is created
 
             UpdateJsonFile.InstantiateJsonFileFromSqlDb(ListOfProducts); //json file is to reflect sql db at all times
-            //new text
+
             do //continue the program until user wants to quit
             {
 
