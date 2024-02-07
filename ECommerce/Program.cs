@@ -22,10 +22,10 @@ namespace ECommercePlatform
             CheckForFileAndDirectory.CheckForFile(); //if there is no file, then it is created
 
             UpdateJsonFile.InstantiateJsonFileFromSqlDb(ListOfProducts); //json file is to reflect sql db at all times
-
+            //new text
             do //continue the program until user wants to quit
             {
-                
+
                 ListOfProducts = ProductFileManager.DeserializeJsonFileToList(); //allows product stored in file as memory upon start up
 
                 //order sql db identify column to be chronological order, if this is gone identify column is incorrect
@@ -62,7 +62,7 @@ namespace ECommercePlatform
                         Create.AddToList(ListOfProducts!); //Add product to JSON file 
                         CreateHandler.AddToSqlDb(ListOfProducts); //Add to SQL db
                         ProductFileManager.SerializeToJsonFile(ListOfProducts); //Serialize the updated list to the JSON file
-                        Create.CreateOrder(ListOfOrders,ListOfProducts);
+                        Create.CreateOrder(ListOfOrders, ListOfProducts);
                         break;
                     case "3": //remove the product requested by user
                         Delete.DeleteFromList(ListOfProducts!);//removes product from list
