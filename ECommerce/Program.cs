@@ -52,17 +52,21 @@ namespace ECommercePlatform
 
                         break;
                     case "1": //view all products available
-                        Read.ViewProduct(ListOfProducts); //views what is in list & JSON file
+                        ReadProducts.ViewProduct(ListOfProducts); //views what is in list & JSON file
 
                         ReadHandler.ReadSqlDb(); //views what is in db
                         Console.ReadLine();
                         break;
-                    case "2": //add the product requested by user via the console application
+                    case "2": //add the product requested by user 
 
-                        Create.AddToList(ListOfProducts!); //Add product to JSON file 
+                        CreateProduct.AddToList(ListOfProducts!); //Add product to JSON file 
                         CreateHandler.AddToSqlDb(ListOfProducts); //Add to SQL db
                         ProductFileManager.SerializeToJsonFile(ListOfProducts); //Serialize the updated list to the JSON file
-                        Create.CreateOrder(ListOfOrders, ListOfProducts);
+                        //CreateProduct.CreateOrder(ListOfOrders, ListOfProducts);
+
+                        //create a new order and add to list
+                        CreateOrder.CreateOrderAndAddToList(ListOfOrders!);
+                        
                         break;
                     case "3": //remove the product requested by user
                         Delete.DeleteFromList(ListOfProducts!);//removes product from list
@@ -73,6 +77,13 @@ namespace ECommercePlatform
                         Update.UpdateProductInList(ListOfProducts!);//Updates the products name or description in both JSON file and SQL db
                         //UpdateHandler.UpdateProductInSqlDb();
                         break;
+                    case "5": //view all orders
+                        ReadOrder.ReadAllOrders(ListOfOrders);
+                        Console.ReadLine();
+                        break;
+                    case "6": //create an order
+
+
                     default:
                         Console.WriteLine("Invalid input");
                         break;

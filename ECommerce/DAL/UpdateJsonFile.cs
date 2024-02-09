@@ -21,10 +21,12 @@ namespace ECommerce.DAL
 
             //Attempt to connect console application to server database
 
+            DataBaseHandler handler = new DataBaseHandler();
+
             //variable declaration
             string connectionString = null!;
             SqlConnection cnn;
-            connectionString = $"Data Source={dataSource};Initial Catalog={dataBase};User ID={username};Password={pwd}";
+            connectionString = $"Data Source={dataSource};Initial Catalog={dataBase};User ID={handler.username};Password={pwd}";
 
             //assign connection
             cnn = new SqlConnection(connectionString);

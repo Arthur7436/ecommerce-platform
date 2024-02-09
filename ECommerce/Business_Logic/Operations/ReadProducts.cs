@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Business_Logic.Operations
 {
-    public class Read
+    public class ReadProducts
     {
         public delegate void DisplayMessage(string message);
         public static DisplayMessage displayDelegate;
 
-        static Read()
+        static ReadProducts()
         {
             displayDelegate = DisplayText;
         }

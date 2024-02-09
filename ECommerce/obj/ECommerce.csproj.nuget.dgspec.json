@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/home/arthur/Desktop/Github/ecommerce-platform/ECommerce/ECommerce.csproj": {}
+    "C:\\ecommerce-platform\\ECommerce\\ECommerce.csproj": {}
   },
   "projects": {
-    "/home/arthur/Desktop/Github/ecommerce-platform/ECommerce/ECommerce.csproj": {
+    "C:\\ecommerce-platform\\ECommerce\\ECommerce.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/arthur/Desktop/Github/ecommerce-platform/ECommerce/ECommerce.csproj",
+        "projectUniqueName": "C:\\ecommerce-platform\\ECommerce\\ECommerce.csproj",
         "projectName": "ECommerce",
-        "projectPath": "/home/arthur/Desktop/Github/ecommerce-platform/ECommerce/ECommerce.csproj",
-        "packagesPath": "/home/arthur/.nuget/packages/",
-        "outputPath": "/home/arthur/Desktop/Github/ecommerce-platform/ECommerce/obj/",
+        "projectPath": "C:\\ecommerce-platform\\ECommerce\\ECommerce.csproj",
+        "packagesPath": "C:\\Users\\athai\\.nuget\\packages\\",
+        "outputPath": "C:\\ecommerce-platform\\ECommerce\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/arthur/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\athai\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -65,7 +67,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -74,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.126/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
