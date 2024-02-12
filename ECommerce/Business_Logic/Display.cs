@@ -23,6 +23,8 @@ namespace ECommerce.Business_Logic
                     "3. Remove a product",
                     "4. Update a product",
                     "5. View all orders",
+                    "6. Create new order",
+                    "7. Add products to an order",
                     "Enter 'r' to reset the list to null",
                     "Enter 'q' to exit the program"
                 };

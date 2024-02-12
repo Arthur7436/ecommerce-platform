@@ -79,15 +79,71 @@ namespace ECommercePlatform
                         break;
                     case "5": //view all orders
 
-                        //Create a temporary list
-                        List<Product> list = new List<Product>();
-                        list.Add(list[0]);
-
-                        ReadOrder.ReadAllOrders(ListOfOrders);
+                        Console.WriteLine($"All current orders");
+                        foreach (var item in ListOfOrders)
+                        {
+                            Console.WriteLine($"{item.OrderId}");
+                        }
                         Console.ReadLine();
                         break;
-                    case "6": //create an order
+                    case "6": //Create new order
+                        var newOrder = new Order
+                        {
+                            OrderId = Guid.NewGuid().ToString("N"),
+                            OrderDate = DateTime.Now,
+                            Products = new List<Product>() //no products added yet
+                        };
+                        ListOfOrders.Add( newOrder );
+                        Console.WriteLine($"New order created with ID: {newOrder.OrderId}");
+                        Console.ReadLine();
+                        break;
 
+                    case "7": //add a product to an existing order
+                        if (ListOfOrders.Count == 0)
+                        {
+                            Console.WriteLine("No orders available to add products to.");
+                            Console.ReadLine();
+                            break;
+                        }
+
+                        Console.WriteLine("Select an order by ID to add a product to:");
+                        foreach (var order in ListOfOrders)
+                        {
+                            Console.WriteLine($"Order ID: {order.OrderId}, Date: {order.OrderDate}, Products: {order.Products.Count}");
+                        }
+
+                        var orderId = Console.ReadLine();
+                        var selectedOrder = ListOfOrders.FirstOrDefault(o => o.OrderId == orderId);
+                        if (selectedOrder == null)
+                        {
+                            Console.WriteLine("Order not found.");
+                            break;
+                        }
+
+                        if(ListOfProducts.Count == 0)
+                        {
+                            Console.WriteLine("No products available to add.");
+                        }
+
+                        Console.WriteLine("Select a product by ID to add to the order:");
+                        foreach(var product in ListOfProducts)
+                        {
+                            Console.WriteLine($"Product ID: {product.Id}, Name: {product.NameOfProduct}");
+                        }
+
+                        var productId = Console.ReadLine();
+                        var selectedProduct = ListOfProducts.FirstOrDefault(p => p.Id == productId);
+                        if (selectedProduct == null)
+                        {
+                            Console.WriteLine("Product not found.");
+                            break;
+                        }
+
+                        selectedOrder.Products.Add(selectedProduct );
+                        Console.WriteLine($"Product {selectedProduct.NameOfProduct} added to order {selectedOrder.OrderId}");
+                        Console.ReadLine();
+
+                        break;
 
                     default:
                         Console.WriteLine("Invalid input");
