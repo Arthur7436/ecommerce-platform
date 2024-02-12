@@ -78,6 +78,11 @@ namespace ECommercePlatform
                         //UpdateHandler.UpdateProductInSqlDb();
                         break;
                     case "5": //view all orders
+
+                        //Create a temporary list
+                        List<Product> list = new List<Product>();
+                        list.Add(list[0]);
+
                         ReadOrder.ReadAllOrders(ListOfOrders);
                         Console.ReadLine();
                         break;
